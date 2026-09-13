@@ -61,18 +61,39 @@ void main() {
     await _openApp(tester);
 
     expect(find.text('Compare condo prices'), findsOneWidget);
-    expect(find.textContaining('Coverage is limited'), findsOneWidget);
+    expect(find.text('Condo size'), findsOneWidget);
+    expect(find.text('80 m²'), findsWidgets);
 
     await _pickFromList(tester, const ValueKey('city-a'), 'Prague');
     await _pickFromList(tester, const ValueKey('city-b'), 'Minsk');
 
+    await tester.ensureVisible(find.text('Compare'));
     await tester.tap(find.text('Compare'));
     await tester.pump();
 
     expect(find.text('80 m² comparison'), findsOneWidget);
     expect(find.text('\$449,824'), findsWidgets);
-    expect(find.text('\$97,959'), findsWidgets);
+    expect(find.text('\$97,960'), findsWidgets);
     expect(find.textContaining('cheaper'), findsOneWidget);
+  });
+
+  testWidgets('rescales prices when condo size changes', (tester) async {
+    await _openApp(tester);
+
+    await _pickFromList(tester, const ValueKey('city-a'), 'Prague');
+    await _pickFromList(tester, const ValueKey('city-b'), 'Minsk');
+
+    await tester.ensureVisible(find.byKey(const ValueKey('size-preset-100')));
+    await tester.tap(find.byKey(const ValueKey('size-preset-100')));
+    await tester.pump();
+
+    await tester.ensureVisible(find.text('Compare'));
+    await tester.tap(find.text('Compare'));
+    await tester.pump();
+
+    expect(find.text('100 m² comparison'), findsOneWidget);
+    expect(find.text('\$562,280'), findsWidgets);
+    expect(find.text('\$122,450'), findsWidgets);
   });
 
   testWidgets('keeps Compare disabled for the same city', (tester) async {

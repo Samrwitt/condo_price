@@ -19,8 +19,9 @@ class Capital {
   final double p75UsdPerM2;
   final int price80m2;
 
-  int get rangeLow80 => (p25UsdPerM2 * 80).round();
-  int get rangeHigh80 => (p75UsdPerM2 * 80).round();
+  int priceFor(num m2) => (medianUsdPerM2 * m2).round();
+  int rangeLowFor(num m2) => (p25UsdPerM2 * m2).round();
+  int rangeHighFor(num m2) => (p75UsdPerM2 * m2).round();
 
   String get label => '$city, $country';
 

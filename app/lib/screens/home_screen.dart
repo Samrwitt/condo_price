@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../format.dart';
 import '../models/capital.dart';
+import '../widgets/size_control.dart';
 import 'city_picker_screen.dart';
 import 'result_screen.dart';
 
@@ -19,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   Capital? _cityA;
   Capital? _cityB;
+  late int _sizeM2 = widget.catalog.standardM2.round();
 
   bool get _canCompare =>
       _cityA != null && _cityB != null && _cityA!.id != _cityB!.id;
@@ -59,7 +62,11 @@ class _HomeScreenState extends State<HomeScreen> {
       PageRouteBuilder(
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
-        pageBuilder: (_, _, _) => ResultScreen(cityA: _cityA!, cityB: _cityB!),
+        pageBuilder: (_, _, _) => ResultScreen(
+          cityA: _cityA!,
+          cityB: _cityB!,
+          sizeM2: _sizeM2,
+        ),
       ),
     );
   }
@@ -80,7 +87,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Listing-based estimates for a standard 80 m² condo in two capital cities.',
+            'Listing-based estimates for a ${formatM2(_sizeM2)} condo in two capital cities. '
+            '${formatM2(widget.catalog.standardM2.round())} is the default standard.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: colors.onSurfaceVariant,
             ),
@@ -107,6 +115,12 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'City B',
             city: _cityB,
             onTap: () => _pickCity(isA: false),
+          ),
+          const SizedBox(height: 24),
+          SizeControl(
+            sizeM2: _sizeM2,
+            defaultSize: widget.catalog.standardM2.round(),
+            onChanged: (value) => setState(() => _sizeM2 = value),
           ),
           const SizedBox(height: 24),
           FilledButton(

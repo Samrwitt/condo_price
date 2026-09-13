@@ -13,6 +13,11 @@ String formatUsd(num value) {
 
 String formatUsdPerM2(num value) => '${formatUsd(value)} / m²';
 
+String formatM2(num value) {
+  final rounded = value.round();
+  return '$rounded m²';
+}
+
 String formatCount(int value) {
   final digits = value.toString();
   final buffer = StringBuffer();

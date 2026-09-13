@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../layout.dart';
 import '../models/capital.dart';
 import '../widgets/size_control.dart';
 import 'city_picker_screen.dart';
@@ -75,63 +76,87 @@ class _HomeScreenState extends State<HomeScreen> {
     final colors = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(title: const Text('Condo Compare')),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
-        children: [
-          Text(
-            'Typical condo price in two capitals.',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: colors.onSurfaceVariant,
-            ),
-          ),
-          const SizedBox(height: 20),
-          _CityField(
-            fieldKey: const ValueKey('city-a'),
-            city: _cityA,
-            placeholder: 'City A',
-            onTap: () => _pickCity(isA: true),
-          ),
-          const SizedBox(height: 10),
-          Center(
-            child: IconButton.filledTonal(
-              onPressed: _swap,
-              tooltip: 'Swap cities',
-              style: IconButton.styleFrom(
-                backgroundColor: colors.primaryContainer,
-                foregroundColor: colors.onPrimaryContainer,
+      body: SafeArea(
+        child: Padding(
+          padding: PageInset.of(context),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Typical condo price in two capitals.',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: colors.onSurfaceVariant,
+                ),
               ),
-              icon: const Icon(Icons.swap_vert),
-            ),
-          ),
-          const SizedBox(height: 10),
-          _CityField(
-            fieldKey: const ValueKey('city-b'),
-            city: _cityB,
-            placeholder: 'City B',
-            onTap: () => _pickCity(isA: false),
-          ),
-          const SizedBox(height: 28),
-          SizeControl(
-            sizeM2: _sizeM2,
-            defaultSize: widget.catalog.standardM2.round(),
-            onChanged: (value) => setState(() => _sizeM2 = value),
-          ),
-          const SizedBox(height: 28),
-          FilledButton(
-            onPressed: _canCompare ? _compare : null,
-            child: const Text('Compare'),
-          ),
-          if (_cityA != null && _cityB != null && _cityA!.id == _cityB!.id) ...[
-            const SizedBox(height: 12),
-            Text(
-              'Pick two different cities',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: colors.error,
+              const SizedBox(height: 16),
+              Expanded(
+                flex: 5,
+                child: Card.filled(
+                  color: colors.surfaceContainerHighest,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: _CityField(
+                            fieldKey: const ValueKey('city-a'),
+                            badge: 'A',
+                            city: _cityA,
+                            placeholder: 'City A',
+                            onTap: () => _pickCity(isA: true),
+                          ),
+                        ),
+                        IconButton.filledTonal(
+                          onPressed: _swap,
+                          tooltip: 'Swap cities',
+                          icon: const Icon(Icons.swap_vert),
+                        ),
+                        Expanded(
+                          child: _CityField(
+                            fieldKey: const ValueKey('city-b'),
+                            badge: 'B',
+                            city: _cityB,
+                            placeholder: 'City B',
+                            onTap: () => _pickCity(isA: false),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ],
-        ],
+              const SizedBox(height: 12),
+              Card.filled(
+                color: colors.surfaceContainerLow,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                  child: SizeControl(
+                    sizeM2: _sizeM2,
+                    defaultSize: widget.catalog.standardM2.round(),
+                    onChanged: (value) => setState(() => _sizeM2 = value),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              FilledButton(
+                onPressed: _canCompare ? _compare : null,
+                child: const Text('Compare'),
+              ),
+              if (_cityA != null &&
+                  _cityB != null &&
+                  _cityA!.id == _cityB!.id) ...[
+                const SizedBox(height: 8),
+                Text(
+                  'Pick two different cities',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: colors.error,
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -140,12 +165,14 @@ class _HomeScreenState extends State<HomeScreen> {
 class _CityField extends StatelessWidget {
   const _CityField({
     required this.fieldKey,
+    required this.badge,
     required this.city,
     required this.placeholder,
     required this.onTap,
   });
 
   final Key fieldKey;
+  final String badge;
   final Capital? city;
   final String placeholder;
   final VoidCallback onTap;
@@ -154,36 +181,45 @@ class _CityField extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return Material(
-      color: colors.surfaceContainerLow,
-      borderRadius: BorderRadius.circular(18),
+      color: colors.surface,
+      borderRadius: BorderRadius.circular(16),
       child: InkWell(
         key: fieldKey,
         onTap: onTap,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(16),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             children: [
+              CircleAvatar(
+                radius: 18,
+                backgroundColor: colors.secondaryContainer,
+                foregroundColor: colors.onSecondaryContainer,
+                child: Text(
+                  badge,
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+              ),
+              const SizedBox(width: 16),
               Expanded(
                 child: city == null
                     ? Text(
                         placeholder,
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: colors.onSurfaceVariant,
                         ),
                       )
                     : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             city!.city,
-                            style: Theme.of(context).textTheme.titleMedium
-                                ?.copyWith(fontWeight: FontWeight.w700),
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
-                          const SizedBox(height: 2),
                           Text(
                             city!.country,
-                            style: Theme.of(context).textTheme.bodySmall
+                            style: Theme.of(context).textTheme.bodyMedium
                                 ?.copyWith(color: colors.onSurfaceVariant),
                           ),
                         ],

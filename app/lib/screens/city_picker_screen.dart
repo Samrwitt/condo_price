@@ -46,74 +46,66 @@ class _CityPickerScreenState extends State<CityPickerScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-            child: TextField(
-              controller: _query,
-              autofocus: true,
-              textInputAction: TextInputAction.search,
-              decoration: InputDecoration(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              child: SearchBar(
+                controller: _query,
                 hintText: 'Search',
-                prefixIcon: const Icon(Icons.search),
-                suffixIcon: _query.text.isEmpty
-                    ? null
-                    : IconButton(
-                        onPressed: () {
-                          _query.clear();
-                          setState(() {});
-                        },
-                        icon: const Icon(Icons.close),
-                      ),
-                filled: true,
-                fillColor: colors.surfaceContainerLow,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: BorderSide.none,
+                leading: const Icon(Icons.search),
+                trailing: [
+                  if (_query.text.isNotEmpty)
+                    IconButton(
+                      onPressed: () {
+                        _query.clear();
+                        setState(() {});
+                      },
+                      icon: const Icon(Icons.close),
+                    ),
+                ],
+                onChanged: (_) => setState(() {}),
+                elevation: const WidgetStatePropertyAll(0),
+                backgroundColor: WidgetStatePropertyAll(
+                  colors.surfaceContainerHigh,
                 ),
               ),
-              onChanged: (_) => setState(() {}),
             ),
-          ),
-          Expanded(
-            child: matches.isEmpty
-                ? Center(
-                    child: Text(
-                      'No match',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: colors.onSurfaceVariant,
+            Expanded(
+              child: matches.isEmpty
+                  ? Center(
+                      child: Text(
+                        'No match',
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: colors.onSurfaceVariant,
+                        ),
                       ),
+                    )
+                  : ListView.separated(
+                      itemCount: matches.length,
+                      separatorBuilder: (_, _) => Divider(
+                        height: 1,
+                        color: colors.outlineVariant,
+                      ),
+                      itemBuilder: (context, index) {
+                        final city = matches[index];
+                        final selected = city.id == widget.selectedId;
+                        return ListTile(
+                          title: Text(city.city),
+                          subtitle: Text(city.country),
+                          trailing: selected
+                              ? Icon(Icons.check, color: colors.primary)
+                              : null,
+                          selected: selected,
+                          selectedTileColor: colors.secondaryContainer,
+                          onTap: () => Navigator.of(context).pop(city),
+                        );
+                      },
                     ),
-                  )
-                : ListView.separated(
-                    itemCount: matches.length,
-                    separatorBuilder: (_, _) => Divider(
-                      height: 1,
-                      color: colors.outlineVariant,
-                    ),
-                    itemBuilder: (context, index) {
-                      final city = matches[index];
-                      final selected = city.id == widget.selectedId;
-                      return ListTile(
-                        title: Text(
-                          city.city,
-                          style: const TextStyle(fontWeight: FontWeight.w600),
-                        ),
-                        subtitle: Text(city.country),
-                        trailing: selected
-                            ? Icon(Icons.check, color: colors.primary)
-                            : null,
-                        selected: selected,
-                        selectedTileColor: colors.primaryContainer.withValues(
-                          alpha: 0.45,
-                        ),
-                        onTap: () => Navigator.of(context).pop(city),
-                      );
-                    },
-                  ),
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

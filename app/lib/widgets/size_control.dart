@@ -31,22 +31,19 @@ class SizeControl extends StatelessWidget {
             color: colors.onSurfaceVariant,
           ),
         ),
-        const SizedBox(height: 4),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               formatM2(sizeM2),
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.w700,
-              ),
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             if (sizeM2 != defaultSize)
               IconButton(
                 key: const ValueKey('size-reset'),
                 tooltip: formatM2(defaultSize),
                 onPressed: () => onChanged(defaultSize),
-                icon: Icon(Icons.restart_alt, color: colors.primary),
+                icon: const Icon(Icons.restart_alt),
               ),
           ],
         ),
@@ -64,10 +61,11 @@ class SizeControl extends StatelessWidget {
           alignment: WrapAlignment.center,
           children: [
             for (final preset in presets)
-              ChoiceChip(
+              FilterChip(
                 key: ValueKey('size-preset-$preset'),
                 label: Text(formatM2(preset)),
                 selected: sizeM2 == preset,
+                showCheckmark: false,
                 onSelected: (_) => onChanged(preset),
               ),
           ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'data/capitals_repository.dart';
+import 'layout.dart';
 import 'models/capital.dart';
 import 'screens/home_screen.dart';
 import 'theme.dart';
@@ -24,18 +25,7 @@ class CondoCompareApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: buildAppTheme(),
       builder: (context, child) {
-        final content = child ?? const SizedBox.shrink();
-        return LayoutBuilder(
-          builder: (context, constraints) {
-            if (constraints.maxWidth <= 480) return content;
-            return ColoredBox(
-              color: Theme.of(context).colorScheme.surfaceContainerLowest,
-              child: Center(
-                child: SizedBox(width: 480, height: constraints.maxHeight, child: content),
-              ),
-            );
-          },
-        );
+        return PhoneShell(child: child ?? const SizedBox.shrink());
       },
       home: CatalogGate(repository: repository),
     );

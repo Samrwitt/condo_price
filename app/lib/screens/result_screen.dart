@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../format.dart';
+import '../layout.dart';
 import '../models/capital.dart';
 import '../widgets/size_control.dart';
 
@@ -38,58 +39,68 @@ class _ResultScreenState extends State<ResultScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(formatM2(_sizeM2))),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(20, 4, 20, 32),
-        children: [
-          SizeControl(
-            sizeM2: _sizeM2,
-            onChanged: (value) => setState(() => _sizeM2 = value),
-          ),
-          const SizedBox(height: 20),
-          Text(
-            'Typical ${formatM2(_sizeM2)} condo',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            '${cheaper.city} is ${formatUsd(dollarGap)} cheaper',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: colors.primary,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      body: SafeArea(
+        child: Padding(
+          padding: PageInset.of(context),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(
-                child: _PriceCard(
-                  city: cityA,
-                  price: priceA,
-                  highlight: cityA.id == cheaper.id,
+              Card.filled(
+                color: colors.surfaceContainerLow,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
+                  child: SizeControl(
+                    sizeM2: _sizeM2,
+                    onChanged: (value) => setState(() => _sizeM2 = value),
+                  ),
                 ),
               ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: _PriceCard(
-                  city: cityB,
-                  price: priceB,
-                  highlight: cityB.id == cheaper.id,
+              const SizedBox(height: 16),
+              Text(
+                'Typical ${formatM2(_sizeM2)} condo',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                '${cheaper.city} is ${formatUsd(dollarGap)} cheaper',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: colors.primary,
                 ),
               ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      child: _PriceCard(
+                        city: cityA,
+                        price: priceA,
+                        highlight: cityA.id == cheaper.id,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _PriceCard(
+                        city: cityB,
+                        price: priceB,
+                        highlight: cityB.id == cheaper.id,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              _PriceBar(label: cityA.city, price: priceA, maxPrice: maxPrice),
+              const SizedBox(height: 10),
+              _PriceBar(label: cityB.city, price: priceB, maxPrice: maxPrice),
+              const SizedBox(height: 16),
+              _StatsCard(cityA: cityA, cityB: cityB, sizeM2: _sizeM2),
             ],
           ),
-          const SizedBox(height: 20),
-          _PriceBar(label: cityA.city, price: priceA, maxPrice: maxPrice),
-          const SizedBox(height: 10),
-          _PriceBar(label: cityB.city, price: priceB, maxPrice: maxPrice),
-          const SizedBox(height: 20),
-          _StatsCard(cityA: cityA, cityB: cityB, sizeM2: _sizeM2),
-        ],
+        ),
       ),
     );
   }
@@ -109,30 +120,27 @@ class _PriceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    return Card(
-      color: highlight ? colors.primaryContainer : colors.surfaceContainerLow,
+    return Card.filled(
+      color: highlight ? colors.primaryContainer : colors.surfaceContainerHighest,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 18),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              city.city,
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w700,
-              ),
-            ),
+            Text(city.city, style: Theme.of(context).textTheme.titleMedium),
             Text(
               city.country,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: colors.onSurfaceVariant,
               ),
             ),
-            const SizedBox(height: 14),
-            Text(
-              formatUsd(price),
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.w800,
+            const Spacer(),
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerLeft,
+              child: Text(
+                formatUsd(price),
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
           ],
@@ -164,17 +172,11 @@ class _PriceBar extends StatelessWidget {
         const SizedBox(height: 6),
         ClipRRect(
           borderRadius: BorderRadius.circular(99),
-          child: ColoredBox(
-            color: colors.surfaceContainer,
-            child: SizedBox(
-              height: 10,
-              width: double.infinity,
-              child: FractionallySizedBox(
-                alignment: Alignment.centerLeft,
-                widthFactor: widthFactor.clamp(0.06, 1.0),
-                child: ColoredBox(color: colors.primary),
-              ),
-            ),
+          child: LinearProgressIndicator(
+            value: widthFactor.clamp(0.04, 1.0),
+            minHeight: 8,
+            backgroundColor: colors.surfaceContainerHighest,
+            color: colors.primary,
           ),
         ),
       ],
@@ -195,7 +197,8 @@ class _StatsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Card.filled(
+      color: Theme.of(context).colorScheme.surfaceContainerLow,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
         child: Column(
@@ -237,8 +240,9 @@ class _StatRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = Theme.of(context).textTheme.bodyMedium;
-    final strong = style?.copyWith(fontWeight: FontWeight.w700);
+    final strong = Theme.of(context).textTheme.bodyMedium?.copyWith(
+      fontWeight: FontWeight.w500,
+    );
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Row(

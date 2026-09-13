@@ -35,11 +35,12 @@ class _ResultScreenState extends State<ResultScreen> {
     final dollarGap = costlier.priceFor(_sizeM2) - cheapPrice;
     final percentGap = cheapPrice == 0 ? 0.0 : dollarGap / cheapPrice * 100;
     final maxPrice = costlier.priceFor(_sizeM2).toDouble();
+    final colors = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: AppBar(title: Text('${formatM2(_sizeM2)} comparison')),
+      appBar: AppBar(title: Text(formatM2(_sizeM2))),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        padding: const EdgeInsets.fromLTRB(20, 4, 20, 32),
         children: [
           SizeControl(
             sizeM2: _sizeM2,
@@ -47,16 +48,12 @@ class _ResultScreenState extends State<ResultScreen> {
           ),
           const SizedBox(height: 20),
           Text(
-            'Typical ${formatM2(_sizeM2)} condo',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 4),
-          Text(
             '${cheaper.city} is ${formatUsd(dollarGap)} cheaper '
-            '(${percentGap.toStringAsFixed(0)}%).',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: Theme.of(context).colorScheme.primary,
-              fontWeight: FontWeight.w600,
+            '(${percentGap.toStringAsFixed(0)}%)',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              color: colors.primary,
+              fontWeight: FontWeight.w700,
             ),
           ),
           const SizedBox(height: 16),
@@ -80,19 +77,12 @@ class _ResultScreenState extends State<ResultScreen> {
               ),
             ],
           ),
-          const SizedBox(height: 24),
-          Text(
-            'Price scale',
-            style: Theme.of(context).textTheme.titleSmall,
-          ),
-          const SizedBox(height: 12),
-          _PriceBar(city: cityA, price: priceA, maxPrice: maxPrice),
+          const SizedBox(height: 20),
+          _PriceBar(label: cityA.city, price: priceA, maxPrice: maxPrice),
           const SizedBox(height: 10),
-          _PriceBar(city: cityB, price: priceB, maxPrice: maxPrice),
-          const SizedBox(height: 24),
-          _CityStats(city: cityA, sizeM2: _sizeM2),
-          const SizedBox(height: 12),
-          _CityStats(city: cityB, sizeM2: _sizeM2),
+          _PriceBar(label: cityB.city, price: priceB, maxPrice: maxPrice),
+          const SizedBox(height: 20),
+          _StatsCard(cityA: cityA, cityB: cityB, sizeM2: _sizeM2),
         ],
       ),
     );
@@ -116,13 +106,15 @@ class _PriceCard extends StatelessWidget {
     return Card(
       color: highlight ? colors.primaryContainer : colors.surfaceContainerLow,
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               city.city,
-              style: Theme.of(context).textTheme.titleSmall,
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
             ),
             Text(
               city.country,
@@ -130,23 +122,13 @@ class _PriceCard extends StatelessWidget {
                 color: colors.onSurfaceVariant,
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 14),
             Text(
               formatUsd(price),
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.w700,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w800,
               ),
             ),
-            if (highlight) ...[
-              const SizedBox(height: 8),
-              Text(
-                'Lower price',
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: colors.primary,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
           ],
         ),
       ),
@@ -156,12 +138,12 @@ class _PriceCard extends StatelessWidget {
 
 class _PriceBar extends StatelessWidget {
   const _PriceBar({
-    required this.city,
+    required this.label,
     required this.price,
     required this.maxPrice,
   });
 
-  final Capital city;
+  final String label;
   final int price;
   final double maxPrice;
 
@@ -172,16 +154,20 @@ class _PriceBar extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(city.city, style: Theme.of(context).textTheme.labelLarge),
+        Text(label, style: Theme.of(context).textTheme.labelLarge),
         const SizedBox(height: 6),
         ClipRRect(
-          borderRadius: BorderRadius.circular(6),
-          child: SizedBox(
-            height: 14,
-            child: FractionallySizedBox(
-              alignment: Alignment.centerLeft,
-              widthFactor: widthFactor.clamp(0.04, 1.0),
-              child: ColoredBox(color: colors.primary),
+          borderRadius: BorderRadius.circular(99),
+          child: ColoredBox(
+            color: colors.surfaceContainer,
+            child: SizedBox(
+              height: 10,
+              width: double.infinity,
+              child: FractionallySizedBox(
+                alignment: Alignment.centerLeft,
+                widthFactor: widthFactor.clamp(0.06, 1.0),
+                child: ColoredBox(color: colors.primary),
+              ),
             ),
           ),
         ),
@@ -190,39 +176,40 @@ class _PriceBar extends StatelessWidget {
   }
 }
 
-class _CityStats extends StatelessWidget {
-  const _CityStats({required this.city, required this.sizeM2});
+class _StatsCard extends StatelessWidget {
+  const _StatsCard({
+    required this.cityA,
+    required this.cityB,
+    required this.sizeM2,
+  });
 
-  final Capital city;
+  final Capital cityA;
+  final Capital cityB;
   final int sizeM2;
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(city.label, style: Theme.of(context).textTheme.titleSmall),
-            const SizedBox(height: 12),
-            _StatRow(label: 'USD per m²', value: formatUsdPerM2(city.medianUsdPerM2)),
             _StatRow(
-              label: 'Listings used',
-              value: formatCount(city.listingCount),
+              label: 'Per m²',
+              left: formatUsd(cityA.medianUsdPerM2),
+              right: formatUsd(cityB.medianUsdPerM2),
             ),
             _StatRow(
-              label: 'Typical ${formatM2(sizeM2)} range',
-              value:
-                  '${formatUsd(city.rangeLowFor(sizeM2))} – ${formatUsd(city.rangeHighFor(sizeM2))}',
+              label: 'Listings',
+              left: formatCount(cityA.listingCount),
+              right: formatCount(cityB.listingCount),
             ),
-            const SizedBox(height: 8),
-            Text(
-              'Range is the 25th–75th percentile of listing prices, scaled to ${formatM2(sizeM2)}.',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: colors.onSurfaceVariant,
-              ),
+            _StatRow(
+              label: 'Range',
+              left:
+                  '${formatUsd(cityA.rangeLowFor(sizeM2))}–${formatUsd(cityA.rangeHighFor(sizeM2))}',
+              right:
+                  '${formatUsd(cityB.rangeLowFor(sizeM2))}–${formatUsd(cityB.rangeHighFor(sizeM2))}',
             ),
           ],
         ),
@@ -232,28 +219,33 @@ class _CityStats extends StatelessWidget {
 }
 
 class _StatRow extends StatelessWidget {
-  const _StatRow({required this.label, required this.value});
+  const _StatRow({
+    required this.label,
+    required this.left,
+    required this.right,
+  });
 
   final String label;
-  final String value;
+  final String left;
+  final String right;
 
   @override
   Widget build(BuildContext context) {
+    final style = Theme.of(context).textTheme.bodyMedium;
+    final strong = style?.copyWith(fontWeight: FontWeight.w700);
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.only(bottom: 12),
       child: Row(
         children: [
-          Expanded(
-            child: Text(
-              label,
-              style: Theme.of(context).textTheme.bodyMedium,
+          Expanded(child: Text(left, style: strong)),
+          Text(
+            label,
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
-          Text(
-            value,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+          Expanded(
+            child: Text(right, style: strong, textAlign: TextAlign.end),
           ),
         ],
       ),

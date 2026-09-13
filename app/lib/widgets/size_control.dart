@@ -24,22 +24,23 @@ class SizeControl extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: Text(
-                'Condo size',
-                style: Theme.of(context).textTheme.labelLarge,
-              ),
-            ),
             Text(
               formatM2(sizeM2),
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.w700,
               ),
             ),
+            if (sizeM2 != defaultSize)
+              IconButton(
+                key: const ValueKey('size-reset'),
+                tooltip: formatM2(defaultSize),
+                onPressed: () => onChanged(defaultSize),
+                icon: Icon(Icons.restart_alt, color: colors.primary),
+              ),
           ],
         ),
         Slider(
@@ -53,21 +54,14 @@ class SizeControl extends StatelessWidget {
         ),
         Wrap(
           spacing: 8,
-          runSpacing: 8,
+          alignment: WrapAlignment.center,
           children: [
             for (final preset in presets)
               ChoiceChip(
                 key: ValueKey('size-preset-$preset'),
-                label: Text(formatM2(preset)),
+                label: Text('$preset'),
                 selected: sizeM2 == preset,
                 onSelected: (_) => onChanged(preset),
-              ),
-            if (sizeM2 != defaultSize)
-              ActionChip(
-                key: const ValueKey('size-reset'),
-                label: Text('Reset to ${formatM2(defaultSize)}'),
-                onPressed: () => onChanged(defaultSize),
-                avatar: Icon(Icons.restart_alt, size: 18, color: colors.primary),
               ),
           ],
         ),

@@ -49,13 +49,13 @@ class _CityPickerScreenState extends State<CityPickerScreen> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
             child: TextField(
               controller: _query,
               autofocus: true,
               textInputAction: TextInputAction.search,
               decoration: InputDecoration(
-                hintText: 'Search city or country',
+                hintText: 'Search',
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: _query.text.isEmpty
                     ? null
@@ -67,9 +67,9 @@ class _CityPickerScreenState extends State<CityPickerScreen> {
                         icon: const Icon(Icons.close),
                       ),
                 filled: true,
-                fillColor: colors.surfaceContainerHighest,
+                fillColor: colors.surfaceContainerLow,
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(16),
                   borderSide: BorderSide.none,
                 ),
               ),
@@ -80,7 +80,7 @@ class _CityPickerScreenState extends State<CityPickerScreen> {
             child: matches.isEmpty
                 ? Center(
                     child: Text(
-                      'No capitals match that search.',
+                      'No match',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: colors.onSurfaceVariant,
                       ),
@@ -88,19 +88,26 @@ class _CityPickerScreenState extends State<CityPickerScreen> {
                   )
                 : ListView.separated(
                     itemCount: matches.length,
-                    separatorBuilder: (_, _) => const Divider(height: 1),
+                    separatorBuilder: (_, _) => Divider(
+                      height: 1,
+                      color: colors.outlineVariant,
+                    ),
                     itemBuilder: (context, index) {
                       final city = matches[index];
                       final selected = city.id == widget.selectedId;
                       return ListTile(
-                        title: Text(city.city),
-                        subtitle: Text(
-                          '${city.country} · ${city.listingCount} listings',
+                        title: Text(
+                          city.city,
+                          style: const TextStyle(fontWeight: FontWeight.w600),
                         ),
+                        subtitle: Text(city.country),
                         trailing: selected
                             ? Icon(Icons.check, color: colors.primary)
                             : null,
                         selected: selected,
+                        selectedTileColor: colors.primaryContainer.withValues(
+                          alpha: 0.45,
+                        ),
                         onTap: () => Navigator.of(context).pop(city),
                       );
                     },

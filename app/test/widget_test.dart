@@ -60,18 +60,17 @@ void main() {
   testWidgets('compares two different capitals', (tester) async {
     await _openApp(tester);
 
-    expect(find.text('Compare condo prices'), findsOneWidget);
-    expect(find.text('Condo size'), findsOneWidget);
+    expect(find.text('Compare'), findsWidgets);
     expect(find.text('80 m²'), findsWidgets);
 
     await _pickFromList(tester, const ValueKey('city-a'), 'Prague');
     await _pickFromList(tester, const ValueKey('city-b'), 'Minsk');
 
-    await tester.ensureVisible(find.text('Compare'));
-    await tester.tap(find.text('Compare'));
+    await tester.ensureVisible(find.widgetWithText(FilledButton, 'Compare'));
+    await tester.tap(find.widgetWithText(FilledButton, 'Compare'));
     await tester.pump();
 
-    expect(find.text('80 m² comparison'), findsOneWidget);
+    expect(find.widgetWithText(AppBar, '80 m²'), findsOneWidget);
     expect(find.text('\$449,824'), findsWidgets);
     expect(find.text('\$97,960'), findsWidgets);
     expect(find.textContaining('cheaper'), findsOneWidget);
@@ -87,11 +86,11 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('size-preset-100')));
     await tester.pump();
 
-    await tester.ensureVisible(find.text('Compare'));
-    await tester.tap(find.text('Compare'));
+    await tester.ensureVisible(find.widgetWithText(FilledButton, 'Compare'));
+    await tester.tap(find.widgetWithText(FilledButton, 'Compare'));
     await tester.pump();
 
-    expect(find.text('100 m² comparison'), findsOneWidget);
+    expect(find.widgetWithText(AppBar, '100 m²'), findsOneWidget);
     expect(find.text('\$562,280'), findsWidgets);
     expect(find.text('\$122,450'), findsWidgets);
   });
@@ -106,6 +105,6 @@ void main() {
       find.widgetWithText(FilledButton, 'Compare'),
     );
     expect(button.onPressed, isNull);
-    expect(find.text('Choose two different capitals to compare.'), findsOneWidget);
+    expect(find.text('Pick two different cities'), findsOneWidget);
   });
 }

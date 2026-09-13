@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'data/capitals_repository.dart';
 import 'models/capital.dart';
 import 'screens/home_screen.dart';
+import 'theme.dart';
 
 void main() {
   runApp(const CondoCompareApp());
@@ -21,13 +22,7 @@ class CondoCompareApp extends StatelessWidget {
     return MaterialApp(
       title: 'Condo Compare',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF1B4D4A),
-          brightness: Brightness.light,
-        ),
-        useMaterial3: true,
-      ),
+      theme: buildAppTheme(),
       builder: (context, child) {
         final content = child ?? const SizedBox.shrink();
         return LayoutBuilder(

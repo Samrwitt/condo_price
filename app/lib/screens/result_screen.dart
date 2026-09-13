@@ -33,7 +33,6 @@ class _ResultScreenState extends State<ResultScreen> {
     final costlier = cheaper.id == cityA.id ? cityB : cityA;
     final cheapPrice = cheaper.priceFor(_sizeM2);
     final dollarGap = costlier.priceFor(_sizeM2) - cheapPrice;
-    final percentGap = cheapPrice == 0 ? 0.0 : dollarGap / cheapPrice * 100;
     final maxPrice = costlier.priceFor(_sizeM2).toDouble();
     final colors = Theme.of(context).colorScheme;
 
@@ -48,12 +47,19 @@ class _ResultScreenState extends State<ResultScreen> {
           ),
           const SizedBox(height: 20),
           Text(
-            '${cheaper.city} is ${formatUsd(dollarGap)} cheaper '
-            '(${percentGap.toStringAsFixed(0)}%)',
+            'Typical ${formatM2(_sizeM2)} condo',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: colors.primary,
               fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            '${cheaper.city} is ${formatUsd(dollarGap)} cheaper',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              color: colors.primary,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 16),
@@ -195,7 +201,7 @@ class _StatsCard extends StatelessWidget {
         child: Column(
           children: [
             _StatRow(
-              label: 'Per m²',
+              label: 'USD / m²',
               left: formatUsd(cityA.medianUsdPerM2),
               right: formatUsd(cityB.medianUsdPerM2),
             ),

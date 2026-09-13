@@ -25,6 +25,13 @@ class SizeControl extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
     return Column(
       children: [
+        Text(
+          'Condo size',
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+            color: colors.onSurfaceVariant,
+          ),
+        ),
+        const SizedBox(height: 4),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -59,7 +66,7 @@ class SizeControl extends StatelessWidget {
             for (final preset in presets)
               ChoiceChip(
                 key: ValueKey('size-preset-$preset'),
-                label: Text('$preset'),
+                label: Text(formatM2(preset)),
                 selected: sizeM2 == preset,
                 onSelected: (_) => onChanged(preset),
               ),

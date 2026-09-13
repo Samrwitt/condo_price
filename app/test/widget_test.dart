@@ -60,7 +60,8 @@ void main() {
   testWidgets('compares two different capitals', (tester) async {
     await _openApp(tester);
 
-    expect(find.text('Compare'), findsWidgets);
+    expect(find.text('Condo Compare'), findsOneWidget);
+    expect(find.text('Condo size'), findsOneWidget);
     expect(find.text('80 m²'), findsWidgets);
 
     await _pickFromList(tester, const ValueKey('city-a'), 'Prague');

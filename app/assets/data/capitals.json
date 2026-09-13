@@ -1,0 +1,226 @@
+{
+  "standardM2": 80.0,
+  "source": "world_real_estate_data(147k).csv",
+  "cities": [
+    {
+      "id": "abu-dhabi",
+      "city": "Abu Dhabi",
+      "country": "UAE",
+      "listingCount": 56,
+      "medianUsdPerM2": 4794.2,
+      "p25UsdPerM2": 3269.9,
+      "p75UsdPerM2": 5648.8,
+      "price80m2": 383538
+    },
+    {
+      "id": "ankara",
+      "city": "Ankara",
+      "country": "Turkey",
+      "listingCount": 102,
+      "medianUsdPerM2": 1659.0,
+      "p25UsdPerM2": 1169.6,
+      "p75UsdPerM2": 2184.0,
+      "price80m2": 132720
+    },
+    {
+      "id": "athens",
+      "city": "Athens",
+      "country": "Greece",
+      "listingCount": 1001,
+      "medianUsdPerM2": 3330.9,
+      "p25UsdPerM2": 2338.2,
+      "p75UsdPerM2": 4617.0,
+      "price80m2": 266473
+    },
+    {
+      "id": "bangkok",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "listingCount": 54,
+      "medianUsdPerM2": 5407.2,
+      "p25UsdPerM2": 3518.5,
+      "p75UsdPerM2": 9122.1,
+      "price80m2": 432579
+    },
+    {
+      "id": "belgrade",
+      "city": "Belgrade",
+      "country": "Serbia",
+      "listingCount": 81,
+      "medianUsdPerM2": 2410.4,
+      "p25UsdPerM2": 2016.3,
+      "p75UsdPerM2": 3004.0,
+      "price80m2": 192835
+    },
+    {
+      "id": "budapest",
+      "city": "Budapest",
+      "country": "Hungary",
+      "listingCount": 5377,
+      "medianUsdPerM2": 2480.6,
+      "p25UsdPerM2": 2056.1,
+      "p75UsdPerM2": 3225.8,
+      "price80m2": 198448
+    },
+    {
+      "id": "helsinki",
+      "city": "Helsinki",
+      "country": "Finland",
+      "listingCount": 110,
+      "medianUsdPerM2": 4293.6,
+      "p25UsdPerM2": 2562.0,
+      "p75UsdPerM2": 5375.2,
+      "price80m2": 343490
+    },
+    {
+      "id": "lisbon",
+      "city": "Lisbon",
+      "country": "Portugal",
+      "listingCount": 208,
+      "medianUsdPerM2": 7123.3,
+      "p25UsdPerM2": 5747.7,
+      "p75UsdPerM2": 8483.3,
+      "price80m2": 569866
+    },
+    {
+      "id": "madrid",
+      "city": "Madrid",
+      "country": "Spain",
+      "listingCount": 54,
+      "medianUsdPerM2": 7080.8,
+      "p25UsdPerM2": 5384.5,
+      "p75UsdPerM2": 8742.8,
+      "price80m2": 566460
+    },
+    {
+      "id": "minsk",
+      "city": "Minsk",
+      "country": "Belarus",
+      "listingCount": 5540,
+      "medianUsdPerM2": 1224.5,
+      "p25UsdPerM2": 986.8,
+      "p75UsdPerM2": 1510.3,
+      "price80m2": 97959
+    },
+    {
+      "id": "moscow",
+      "city": "Moscow",
+      "country": "Russia",
+      "listingCount": 1451,
+      "medianUsdPerM2": 3178.4,
+      "p25UsdPerM2": 2655.1,
+      "p75UsdPerM2": 4976.2,
+      "price80m2": 254274
+    },
+    {
+      "id": "podgorica",
+      "city": "Podgorica",
+      "country": "Montenegro",
+      "listingCount": 140,
+      "medianUsdPerM2": 1763.8,
+      "p25UsdPerM2": 1321.5,
+      "p75UsdPerM2": 2446.8,
+      "price80m2": 141107
+    },
+    {
+      "id": "prague",
+      "city": "Prague",
+      "country": "Czech Republic",
+      "listingCount": 809,
+      "medianUsdPerM2": 5622.8,
+      "p25UsdPerM2": 4843.2,
+      "p75UsdPerM2": 6599.4,
+      "price80m2": 449824
+    },
+    {
+      "id": "riga",
+      "city": "Riga",
+      "country": "Latvia",
+      "listingCount": 909,
+      "medianUsdPerM2": 3080.5,
+      "p25UsdPerM2": 2457.4,
+      "p75UsdPerM2": 4054.1,
+      "price80m2": 246441
+    },
+    {
+      "id": "rome",
+      "city": "Rome",
+      "country": "Italy",
+      "listingCount": 65,
+      "medianUsdPerM2": 9836.6,
+      "p25UsdPerM2": 5158.8,
+      "p75UsdPerM2": 16394.4,
+      "price80m2": 786930
+    },
+    {
+      "id": "tashkent",
+      "city": "Tashkent",
+      "country": "Uzbekistan",
+      "listingCount": 1532,
+      "medianUsdPerM2": 1231.7,
+      "p25UsdPerM2": 1141.3,
+      "p75UsdPerM2": 1560.0,
+      "price80m2": 98535
+    },
+    {
+      "id": "tbilisi",
+      "city": "Tbilisi",
+      "country": "Georgia",
+      "listingCount": 1168,
+      "medianUsdPerM2": 1122.7,
+      "p25UsdPerM2": 898.3,
+      "p75UsdPerM2": 1523.5,
+      "price80m2": 89816
+    },
+    {
+      "id": "vienna",
+      "city": "Vienna",
+      "country": "Austria",
+      "listingCount": 90,
+      "medianUsdPerM2": 6117.8,
+      "p25UsdPerM2": 5213.5,
+      "p75UsdPerM2": 7641.8,
+      "price80m2": 489423
+    },
+    {
+      "id": "vilnius",
+      "city": "Vilnius",
+      "country": "Lithuania",
+      "listingCount": 442,
+      "medianUsdPerM2": 2873.2,
+      "p25UsdPerM2": 2182.4,
+      "p75UsdPerM2": 3873.8,
+      "price80m2": 229854
+    },
+    {
+      "id": "warsaw",
+      "city": "Warsaw",
+      "country": "Poland",
+      "listingCount": 943,
+      "medianUsdPerM2": 3743.1,
+      "p25UsdPerM2": 2992.0,
+      "p75UsdPerM2": 4689.0,
+      "price80m2": 299448
+    },
+    {
+      "id": "yerevan",
+      "city": "Yerevan",
+      "country": "Armenia",
+      "listingCount": 108,
+      "medianUsdPerM2": 2208.7,
+      "p25UsdPerM2": 1821.4,
+      "p75UsdPerM2": 2723.5,
+      "price80m2": 176694
+    },
+    {
+      "id": "zagreb",
+      "city": "Zagreb",
+      "country": "Croatia",
+      "listingCount": 531,
+      "medianUsdPerM2": 3260.8,
+      "p25UsdPerM2": 2751.5,
+      "p75UsdPerM2": 4135.2,
+      "price80m2": 260863
+    }
+  ]
+}

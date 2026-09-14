@@ -36,10 +36,7 @@ String formatListings(int count) {
   return '${formatCount(count)} listings';
 }
 
-String formatSample(int count, {required bool indicative}) {
-  final listings = formatListings(count);
-  return indicative ? '$listings · indicative' : listings;
-}
+String formatSample(int count) => formatListings(count);
 
 String formatOrdinal(int value) {
   final tens = value % 100;

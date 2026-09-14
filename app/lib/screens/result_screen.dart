@@ -40,7 +40,6 @@ class _ResultScreenState extends State<ResultScreen> {
     final dollarGap = highPrice - cheapPrice;
     final maxPrice = highPrice.toDouble();
     final times = formatTimes(highPrice, cheapPrice);
-    final thinNote = _thinSampleNote(cityA, cityB);
     final colors = Theme.of(context).colorScheme;
     final text = Theme.of(context).textTheme;
 
@@ -88,14 +87,6 @@ class _ResultScreenState extends State<ResultScreen> {
                   style: text.bodyMedium?.copyWith(
                     color: colors.onSurfaceVariant,
                   ),
-                ),
-              ],
-              if (thinNote != null) ...[
-                const SizedBox(height: 10),
-                Text(
-                  thinNote,
-                  textAlign: TextAlign.center,
-                  style: text.bodySmall?.copyWith(color: colors.tertiary),
                 ),
               ],
               const SizedBox(height: 20),
@@ -158,15 +149,6 @@ class _ResultScreenState extends State<ResultScreen> {
               ),
               const SizedBox(height: 16),
               _StatsCard(cityA: cityA, cityB: cityB, sizeM2: _sizeM2),
-              const SizedBox(height: 12),
-              Text(
-                widget.catalog.method,
-                textAlign: TextAlign.center,
-                style: text.bodySmall?.copyWith(
-                  color: colors.onSurfaceVariant,
-                  height: 1.35,
-                ),
-              ),
               const SizedBox(height: 8),
             ],
           ),
@@ -174,16 +156,6 @@ class _ResultScreenState extends State<ResultScreen> {
       ),
     );
   }
-}
-
-String? _thinSampleNote(Capital cityA, Capital cityB) {
-  final thin = [cityA, cityB].where((city) => city.indicative).toList();
-  if (thin.isEmpty) return null;
-  if (thin.length == 2) {
-    return 'Both prices use fewer than 200 listings, so treat them as indicative.';
-  }
-  final city = thin.first;
-  return '${city.city} uses ${formatListings(city.listingCount)}, so treat it as indicative.';
 }
 
 class _PriceBar extends StatelessWidget {
@@ -281,14 +253,8 @@ class _StatsCard extends StatelessWidget {
             ),
             _StatRow(
               label: 'Listings',
-              left: formatSample(
-                cityA.listingCount,
-                indicative: cityA.indicative,
-              ),
-              right: formatSample(
-                cityB.listingCount,
-                indicative: cityB.indicative,
-              ),
+              left: formatSample(cityA.listingCount),
+              right: formatSample(cityB.listingCount),
             ),
             _StatRow(
               label: 'Typical range',

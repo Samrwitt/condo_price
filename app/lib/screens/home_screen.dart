@@ -104,27 +104,6 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: PageInset.of(context),
           child: FillColumn(
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '${widget.catalog.cities.length} capitals · real listing photos',
-                    style: text.labelLarge?.copyWith(
-                      color: colors.primary,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 0.2,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    widget.catalog.coverage,
-                    style: text.bodyMedium?.copyWith(
-                      color: colors.onSurfaceVariant,
-                      height: 1.35,
-                    ),
-                  ),
-                ],
-              ),
               Card.filled(
                 color: colors.surfaceContainerHighest,
                 child: Padding(
@@ -226,10 +205,7 @@ class _LivePreview extends StatelessWidget {
           child: CityHeroCard(
             city: cityA,
             priceLabel: formatUsd(priceA),
-            subtitle: formatSample(
-              cityA.listingCount,
-              indicative: cityA.indicative,
-            ),
+            subtitle: formatSample(cityA.listingCount),
             highlight: priceA <= priceB,
             height: 148,
           ),
@@ -239,10 +215,7 @@ class _LivePreview extends StatelessWidget {
           child: CityHeroCard(
             city: cityB,
             priceLabel: formatUsd(priceB),
-            subtitle: formatSample(
-              cityB.listingCount,
-              indicative: cityB.indicative,
-            ),
+            subtitle: formatSample(cityB.listingCount),
             highlight: priceB < priceA,
             height: 148,
           ),
@@ -348,7 +321,7 @@ class _CityField extends StatelessWidget {
                                 ?.copyWith(fontWeight: FontWeight.w600),
                           ),
                           Text(
-                            '${city!.country} · ${formatSample(city!.listingCount, indicative: city!.indicative)}',
+                            '${city!.country} · ${formatSample(city!.listingCount)}',
                             style: Theme.of(context).textTheme.bodySmall
                                 ?.copyWith(color: colors.onSurfaceVariant),
                           ),

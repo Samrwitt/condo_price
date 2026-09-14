@@ -211,7 +211,7 @@ class _CityPickerScreenState extends State<CityPickerScreen> {
                                           ),
                                           const SizedBox(height: 2),
                                           Text(
-                                            '${city.country} · ${formatSample(city.listingCount, indicative: city.indicative)}',
+                                            '${city.country} · ${formatSample(city.listingCount)}',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .bodySmall

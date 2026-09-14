@@ -6,8 +6,6 @@ import 'package:flutter_test/flutter_test.dart';
 final _catalog = CapitalsCatalog(
   standardM2: 80,
   source: 'test',
-  coverage:
-      'Median condo prices for the 22 capitals in this listing set. London, Paris, Tokyo and New York are not in the source data.',
   cities: const [
     Capital(
       id: 'athens',
@@ -74,7 +72,6 @@ void main() {
     await _openApp(tester);
 
     expect(find.text('Condo Compare'), findsOneWidget);
-    expect(find.textContaining('London, Paris, Tokyo and New York'), findsOneWidget);
     expect(find.text('Condo size'), findsOneWidget);
     expect(find.text('80 m²'), findsWidgets);
 
@@ -123,22 +120,20 @@ void main() {
     expect(find.text('Pick two different cities'), findsOneWidget);
   });
 
-  testWidgets('flags a thin sample as indicative', (tester) async {
+  testWidgets('shows listing counts without indicative labels', (tester) async {
     await _openApp(tester);
 
     await _pickFromList(tester, const ValueKey('city-a'), 'Prague');
     await _pickFromList(tester, const ValueKey('city-b'), 'Rome');
 
-    expect(find.textContaining('indicative'), findsWidgets);
+    expect(find.textContaining('57 listings'), findsWidgets);
+    expect(find.textContaining('indicative'), findsNothing);
 
     await tester.ensureVisible(find.widgetWithText(FilledButton, 'Compare'));
     await tester.tap(find.widgetWithText(FilledButton, 'Compare'));
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('57 listings · indicative'), findsWidgets);
-    expect(
-      find.textContaining('Rome uses 57 listings, so treat it as indicative'),
-      findsOneWidget,
-    );
+    expect(find.textContaining('57 listings'), findsWidgets);
+    expect(find.textContaining('indicative'), findsNothing);
   });
 }

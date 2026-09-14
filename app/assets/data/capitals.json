@@ -1,226 +1,383 @@
 {
   "standardM2": 80.0,
   "source": "world_real_estate_data(147k).csv",
+  "indicativeBelow": 200,
+  "coverage": "Median condo prices for the 22 capitals in this listing set. London, Paris, Tokyo and New York are not in the source data.",
+  "method": "Median USD per m² from apartment listings in the city itself, not the surrounding region. Cities with fewer than 200 listings are marked indicative.",
   "cities": [
     {
       "id": "abu-dhabi",
       "city": "Abu Dhabi",
       "country": "UAE",
-      "listingCount": 56,
-      "medianUsdPerM2": 4794.2,
-      "p25UsdPerM2": 3269.9,
-      "p75UsdPerM2": 5648.8,
-      "price80m2": 383538
+      "listingCount": 55,
+      "indicative": true,
+      "medianUsdPerM2": 4819.3,
+      "p25UsdPerM2": 3343.7,
+      "p75UsdPerM2": 5669.8,
+      "price80m2": 385542,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/146/d9d43ee5c69b8c617867d4bf311ae.webp",
+        "https://realting.com/uploads/bigSlider/f2d/a29bb89450b08ad00723ef3e564f1.webp",
+        "https://realting.com/uploads/bigSlider/dbc/c86b75b6729539e7e8c7a2324ce3f.webp",
+        "https://realting.com/uploads/bigSlider/aa5/bf3c5120c061414f2be4b5edc3d31.webp"
+      ]
     },
     {
       "id": "ankara",
       "city": "Ankara",
       "country": "Turkey",
-      "listingCount": 102,
-      "medianUsdPerM2": 1659.0,
-      "p25UsdPerM2": 1169.6,
-      "p75UsdPerM2": 2184.0,
-      "price80m2": 132720
+      "listingCount": 65,
+      "indicative": true,
+      "medianUsdPerM2": 1695.6,
+      "p25UsdPerM2": 1185.7,
+      "p75UsdPerM2": 2348.5,
+      "price80m2": 135649,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/9a0/4f83a0bbab2a7b3138cd3052730d1.webp",
+        "https://realting.com/uploads/bigSlider/49d/012a9f65f4973c6d99912b883f5bb.webp",
+        "https://realting.com/uploads/bigSlider/54e/22d51d60260a011f0850bd60b5cdc.webp",
+        "https://realting.com/uploads/bigSlider/01a/00430399795079f87d30c13aa650c.webp"
+      ]
     },
     {
       "id": "athens",
       "city": "Athens",
       "country": "Greece",
-      "listingCount": 1001,
-      "medianUsdPerM2": 3330.9,
-      "p25UsdPerM2": 2338.2,
-      "p75UsdPerM2": 4617.0,
-      "price80m2": 266473
+      "listingCount": 816,
+      "indicative": false,
+      "medianUsdPerM2": 3356.7,
+      "p25UsdPerM2": 2329.1,
+      "p75UsdPerM2": 4737.7,
+      "price80m2": 268535,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/db1/30629554f270af67036f072439ad3.webp",
+        "https://realting.com/uploads/bigSlider/b75/ad5411d940627a466951ceae68ce7.webp",
+        "https://realting.com/uploads/bigSlider/bc8/ed8b2a36dcd937abc3f1e28e578b8.webp",
+        "https://realting.com/uploads/bigSlider/c81/e64db1336a9a3.webp"
+      ]
     },
     {
       "id": "bangkok",
       "city": "Bangkok",
       "country": "Thailand",
       "listingCount": 54,
+      "indicative": true,
       "medianUsdPerM2": 5407.2,
       "p25UsdPerM2": 3518.5,
       "p75UsdPerM2": 9122.1,
-      "price80m2": 432579
+      "price80m2": 432579,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/806/f304552ebe5770df8eeb6db7c53b8.webp",
+        "https://realting.com/uploads/bigSlider/636/7098956073334ce83fd80fa17eb4d.webp",
+        "https://realting.com/uploads/bigSlider/e1a/f1b184fc47e65f22fde4c1314490a.webp",
+        "https://realting.com/uploads/bigSlider/586/e09d8eb252fb13b33fe522ef0f012.webp"
+      ]
     },
     {
       "id": "belgrade",
       "city": "Belgrade",
       "country": "Serbia",
-      "listingCount": 81,
-      "medianUsdPerM2": 2410.4,
-      "p25UsdPerM2": 2016.3,
-      "p75UsdPerM2": 3004.0,
-      "price80m2": 192835
+      "listingCount": 76,
+      "indicative": true,
+      "medianUsdPerM2": 2418.4,
+      "p25UsdPerM2": 2103.7,
+      "p75UsdPerM2": 3005.7,
+      "price80m2": 193473,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/f27/23c65b94f72e5c9f01a639383d36b.webp",
+        "https://realting.com/uploads/bigSlider/989/e0a8f93860b332cd23b15dc2720d0.webp",
+        "https://realting.com/uploads/bigSlider/20a/d9353e0b8ddc2e412cd284bd62c14.webp",
+        "https://realting.com/uploads/bigSlider/1e6/4c613193ee8222f593a5c03d9c36f.webp"
+      ]
     },
     {
       "id": "budapest",
       "city": "Budapest",
       "country": "Hungary",
-      "listingCount": 5377,
-      "medianUsdPerM2": 2480.6,
-      "p25UsdPerM2": 2056.1,
-      "p75UsdPerM2": 3225.8,
-      "price80m2": 198448
+      "listingCount": 3385,
+      "indicative": false,
+      "medianUsdPerM2": 2768.5,
+      "p25UsdPerM2": 2247.6,
+      "p75UsdPerM2": 3634.5,
+      "price80m2": 221479,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/008/f2b6a6207f1fa0f886cbd967a50f3.webp",
+        "https://realting.com/uploads/bigSlider/c17/6614e56896177.webp",
+        "https://realting.com/uploads/bigSlider/f7d/698fe4e5d6e33b30c40c67cb39ccb.webp",
+        "https://realting.com/uploads/bigSlider/23b/19f45fc13006f.webp"
+      ]
     },
     {
       "id": "helsinki",
       "city": "Helsinki",
       "country": "Finland",
-      "listingCount": 110,
-      "medianUsdPerM2": 4293.6,
-      "p25UsdPerM2": 2562.0,
-      "p75UsdPerM2": 5375.2,
-      "price80m2": 343490
+      "listingCount": 70,
+      "indicative": true,
+      "medianUsdPerM2": 4893.2,
+      "p25UsdPerM2": 3356.7,
+      "p75UsdPerM2": 7336.5,
+      "price80m2": 391458,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/33f/181e1430d5c959d599916871b732f.webp",
+        "https://realting.com/uploads/bigSlider/761/33a79d2e50aa4829a8312a4c58b8c.webp",
+        "https://realting.com/uploads/bigSlider/c60/f944547f9e2b0c689681dfbddd489.webp",
+        "https://realting.com/uploads/bigSlider/524/7232798c27e47d6212ba31ce1ba1b.webp"
+      ]
     },
     {
       "id": "lisbon",
       "city": "Lisbon",
       "country": "Portugal",
-      "listingCount": 208,
-      "medianUsdPerM2": 7123.3,
-      "p25UsdPerM2": 5747.7,
-      "p75UsdPerM2": 8483.3,
-      "price80m2": 569866
+      "listingCount": 196,
+      "indicative": true,
+      "medianUsdPerM2": 7158.3,
+      "p25UsdPerM2": 5981.7,
+      "p75UsdPerM2": 8508.7,
+      "price80m2": 572661,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/935/a56acb661168b.webp",
+        "https://realting.com/uploads/bigSlider/1b0/423d8778e9337.webp",
+        "https://realting.com/uploads/bigSlider/959/4e73992bd325.webp",
+        "https://realting.com/uploads/bigSlider/365/62fa453689593.webp"
+      ]
     },
     {
       "id": "madrid",
       "city": "Madrid",
       "country": "Spain",
-      "listingCount": 54,
-      "medianUsdPerM2": 7080.8,
-      "p25UsdPerM2": 5384.5,
-      "p75UsdPerM2": 8742.8,
-      "price80m2": 566460
+      "listingCount": 42,
+      "indicative": true,
+      "medianUsdPerM2": 6906.5,
+      "p25UsdPerM2": 5202.2,
+      "p75UsdPerM2": 8522.4,
+      "price80m2": 552522,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/76d/4385ad644ce0975fb96bdd5d2dd61.webp",
+        "https://realting.com/uploads/bigSlider/2f9/c2ea99898085839ab26abe85550a7.webp",
+        "https://realting.com/uploads/bigSlider/d6b/4db218c937a0ebf85b5f74d9cff3a.webp",
+        "https://realting.com/uploads/bigSlider/ed9/3c5d6e1d821da8fafc9ba4c664126.webp"
+      ]
     },
     {
       "id": "minsk",
       "city": "Minsk",
       "country": "Belarus",
-      "listingCount": 5540,
-      "medianUsdPerM2": 1224.5,
-      "p25UsdPerM2": 986.8,
-      "p75UsdPerM2": 1510.3,
-      "price80m2": 97959
+      "listingCount": 4104,
+      "indicative": false,
+      "medianUsdPerM2": 1315.2,
+      "p25UsdPerM2": 1147.4,
+      "p75UsdPerM2": 1588.6,
+      "price80m2": 105217,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/b20/46cf8e5c23b25f74ed03589086ad8.webp",
+        "https://realting.com/uploads/bigSlider/f06/7398a1e340b9b.webp",
+        "https://realting.com/uploads/bigSlider/7b7/9c4976b091ad32f652ce223821c13.webp",
+        "https://realting.com/uploads/bigSlider/b47/c06cd10a383f4bee2a8db19f1e727.webp"
+      ]
     },
     {
       "id": "moscow",
       "city": "Moscow",
       "country": "Russia",
       "listingCount": 1451,
+      "indicative": false,
       "medianUsdPerM2": 3178.4,
       "p25UsdPerM2": 2655.1,
       "p75UsdPerM2": 4976.2,
-      "price80m2": 254274
+      "price80m2": 254274,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/a7f/e10af6d3d5828d7bbafb0e9608eb1.webp",
+        "https://realting.com/uploads/bigSlider/8cd/3cc1649f0964f.webp",
+        "https://realting.com/uploads/bigSlider/b94/d5a07dfe5fd73ebc9069bccf67675.webp",
+        "https://realting.com/uploads/bigSlider/880/e2fba9b66b50cf3a8a321a9fca29b.webp"
+      ]
     },
     {
       "id": "podgorica",
       "city": "Podgorica",
       "country": "Montenegro",
-      "listingCount": 140,
-      "medianUsdPerM2": 1763.8,
-      "p25UsdPerM2": 1321.5,
-      "p75UsdPerM2": 2446.8,
-      "price80m2": 141107
+      "listingCount": 138,
+      "indicative": true,
+      "medianUsdPerM2": 1722.4,
+      "p25UsdPerM2": 1316.6,
+      "p75UsdPerM2": 2435.6,
+      "price80m2": 137794,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/83c/3e923831a17e7.webp",
+        "https://realting.com/uploads/bigSlider/8c8/64be1b3d4ea31.webp",
+        "https://realting.com/uploads/bigSlider/865/8f9a781b95607.webp",
+        "https://realting.com/uploads/bigSlider/23d/e4d166cc08b3b.webp"
+      ]
     },
     {
       "id": "prague",
       "city": "Prague",
       "country": "Czech Republic",
-      "listingCount": 809,
-      "medianUsdPerM2": 5622.8,
-      "p25UsdPerM2": 4843.2,
-      "p75UsdPerM2": 6599.4,
-      "price80m2": 449824
+      "listingCount": 718,
+      "indicative": false,
+      "medianUsdPerM2": 5791.9,
+      "p25UsdPerM2": 4988.1,
+      "p75UsdPerM2": 6769.7,
+      "price80m2": 463351,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/210/90118fce6fcf7.webp",
+        "https://realting.com/uploads/bigSlider/d14/8b496b4f24a97.webp",
+        "https://realting.com/uploads/bigSlider/615/c36d2531282ff.webp",
+        "https://realting.com/uploads/bigSlider/41d/1c2d3c86d1cb7.webp"
+      ]
     },
     {
       "id": "riga",
       "city": "Riga",
       "country": "Latvia",
       "listingCount": 909,
+      "indicative": false,
       "medianUsdPerM2": 3080.5,
       "p25UsdPerM2": 2457.4,
       "p75UsdPerM2": 4054.1,
-      "price80m2": 246441
+      "price80m2": 246441,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/a33/b8b94307175f.webp",
+        "https://realting.com/uploads/bigSlider/c26/e9841a00d84bda055e45501681edb.webp",
+        "https://realting.com/uploads/bigSlider/53b/199a8631385abb8282efc553e95be.webp",
+        "https://realting.com/uploads/bigSlider/a88/49852986a6131f86f3679a3bf2f5f.webp"
+      ]
     },
     {
       "id": "rome",
       "city": "Rome",
       "country": "Italy",
-      "listingCount": 65,
-      "medianUsdPerM2": 9836.6,
-      "p25UsdPerM2": 5158.8,
-      "p75UsdPerM2": 16394.4,
-      "price80m2": 786930
+      "listingCount": 57,
+      "indicative": true,
+      "medianUsdPerM2": 11355.4,
+      "p25UsdPerM2": 7761.2,
+      "p75UsdPerM2": 16735.9,
+      "price80m2": 908433,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/261/aa03bddd783618fb7f66497176aa4.webp",
+        "https://realting.com/uploads/bigSlider/679/6f1c219c4c671.webp",
+        "https://realting.com/uploads/bigSlider/b22/ca472ace363a9.webp",
+        "https://realting.com/uploads/bigSlider/31a/671872fea4669645995f89f44ea72.webp"
+      ]
     },
     {
       "id": "tashkent",
       "city": "Tashkent",
       "country": "Uzbekistan",
-      "listingCount": 1532,
-      "medianUsdPerM2": 1231.7,
-      "p25UsdPerM2": 1141.3,
-      "p75UsdPerM2": 1560.0,
-      "price80m2": 98535
+      "listingCount": 1464,
+      "indicative": false,
+      "medianUsdPerM2": 1239.8,
+      "p25UsdPerM2": 1151.0,
+      "p75UsdPerM2": 1582.8,
+      "price80m2": 99182,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/2da/2501394d144ebca3a61f7091c1ec6.webp",
+        "https://realting.com/uploads/bigSlider/116/c43275284f2074738e2e6d4498d74.webp",
+        "https://realting.com/uploads/bigSlider/d12/167f22fcc244e28964257185cf4f7.webp",
+        "https://realting.com/uploads/bigSlider/777/ca9de5fd7cf6e84df2ba0b586f90f.webp"
+      ]
     },
     {
       "id": "tbilisi",
       "city": "Tbilisi",
       "country": "Georgia",
-      "listingCount": 1168,
-      "medianUsdPerM2": 1122.7,
-      "p25UsdPerM2": 898.3,
-      "p75UsdPerM2": 1523.5,
-      "price80m2": 89816
+      "listingCount": 212,
+      "indicative": false,
+      "medianUsdPerM2": 1402.8,
+      "p25UsdPerM2": 1190.2,
+      "p75UsdPerM2": 1951.0,
+      "price80m2": 112226,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/635/22d2e52e1e5a9.webp",
+        "https://realting.com/uploads/bigSlider/2c9/36c694bc4b317.webp",
+        "https://realting.com/uploads/bigSlider/310/99dc927da4d27.webp",
+        "https://realting.com/uploads/bigSlider/850/d9a1895890fff.webp"
+      ]
     },
     {
       "id": "vienna",
       "city": "Vienna",
       "country": "Austria",
       "listingCount": 90,
+      "indicative": true,
       "medianUsdPerM2": 6117.8,
       "p25UsdPerM2": 5213.5,
       "p75UsdPerM2": 7641.8,
-      "price80m2": 489423
+      "price80m2": 489423,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/99b/90cd858a229bf.webp",
+        "https://realting.com/uploads/bigSlider/7b0/05c4b1378a9e7.webp",
+        "https://realting.com/uploads/bigSlider/411/6d0cd2dbdd323.webp",
+        "https://realting.com/uploads/bigSlider/18f/5811f3527b6c1e931ebda2d2b1f7b.webp"
+      ]
     },
     {
       "id": "vilnius",
       "city": "Vilnius",
       "country": "Lithuania",
-      "listingCount": 442,
-      "medianUsdPerM2": 2873.2,
-      "p25UsdPerM2": 2182.4,
-      "p75UsdPerM2": 3873.8,
-      "price80m2": 229854
+      "listingCount": 352,
+      "indicative": false,
+      "medianUsdPerM2": 3106.3,
+      "p25UsdPerM2": 2367.7,
+      "p75UsdPerM2": 3987.4,
+      "price80m2": 248504,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/bbd/4b52455fb3659a8d667686e475831.webp",
+        "https://realting.com/uploads/bigSlider/669/86f8cdc449333.webp",
+        "https://realting.com/uploads/bigSlider/bec/643940e25d0eb.webp",
+        "https://realting.com/uploads/bigSlider/e2c/1d55c5fbf7d2834056c85ecae4c4a.webp"
+      ]
     },
     {
       "id": "warsaw",
       "city": "Warsaw",
       "country": "Poland",
-      "listingCount": 943,
-      "medianUsdPerM2": 3743.1,
-      "p25UsdPerM2": 2992.0,
-      "p75UsdPerM2": 4689.0,
-      "price80m2": 299448
+      "listingCount": 934,
+      "indicative": false,
+      "medianUsdPerM2": 3753.8,
+      "p25UsdPerM2": 3004.5,
+      "p75UsdPerM2": 4694.3,
+      "price80m2": 300303,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/ac3/64a43e661b83d.webp",
+        "https://realting.com/uploads/bigSlider/677/bb0b59958ef7fd2777e1c24259511.webp",
+        "https://realting.com/uploads/bigSlider/0b4/ad86abf38504008afd3d1cc2093dc.webp",
+        "https://realting.com/uploads/bigSlider/ff1/57c4017d5bc7481e8387035c9471d.webp"
+      ]
     },
     {
       "id": "yerevan",
       "city": "Yerevan",
       "country": "Armenia",
       "listingCount": 108,
+      "indicative": true,
       "medianUsdPerM2": 2208.7,
       "p25UsdPerM2": 1821.4,
       "p75UsdPerM2": 2723.5,
-      "price80m2": 176694
+      "price80m2": 176694,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/915/44c8683750dbdb3c2e3b59b7781a5.webp",
+        "https://realting.com/uploads/bigSlider/835/c4d5a818778af.webp",
+        "https://realting.com/uploads/bigSlider/dc0/5d1007cc2b44f3793895bdf84435e.webp",
+        "https://realting.com/uploads/bigSlider/b97/38c6ccc8e340d.webp"
+      ]
     },
     {
       "id": "zagreb",
       "city": "Zagreb",
       "country": "Croatia",
-      "listingCount": 531,
-      "medianUsdPerM2": 3260.8,
-      "p25UsdPerM2": 2751.5,
-      "p75UsdPerM2": 4135.2,
-      "price80m2": 260863
+      "listingCount": 466,
+      "indicative": false,
+      "medianUsdPerM2": 3432.0,
+      "p25UsdPerM2": 2840.0,
+      "p75UsdPerM2": 4269.8,
+      "price80m2": 274559,
+      "photos": [
+        "https://realting.com/uploads/bigSlider/e36/14d4d94dd2523.webp",
+        "https://realting.com/uploads/bigSlider/19e/6ce33c64a08b7.webp",
+        "https://realting.com/uploads/bigSlider/b4f/75a8ffdbc8d421e72b37b9122d3c7.webp",
+        "https://realting.com/uploads/bigSlider/9ce/c336946922537.webp"
+      ]
     }
   ]
 }

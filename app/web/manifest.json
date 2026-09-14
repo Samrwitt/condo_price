@@ -3,7 +3,7 @@
     "short_name": "Condo Compare",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#F3F7FB",
+    "background_color": "#5B9CF6",
     "theme_color": "#5B9CF6",
     "description": "Compare 80 m² condo prices between capital cities.",
     "orientation": "portrait-primary",

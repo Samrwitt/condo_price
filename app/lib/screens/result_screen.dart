@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../format.dart';
 import '../layout.dart';
 import '../models/capital.dart';
+import '../widgets/listing_photo.dart';
 import '../widgets/size_control.dart';
 
 class ResultScreen extends StatefulWidget {
@@ -11,11 +12,13 @@ class ResultScreen extends StatefulWidget {
     required this.cityA,
     required this.cityB,
     required this.sizeM2,
+    required this.catalog,
   });
 
   final Capital cityA;
   final Capital cityB;
   final int sizeM2;
+  final CapitalsCatalog catalog;
 
   @override
   State<ResultScreen> createState() => _ResultScreenState();
@@ -33,71 +36,138 @@ class _ResultScreenState extends State<ResultScreen> {
     final cheaper = priceA <= priceB ? cityA : cityB;
     final costlier = cheaper.id == cityA.id ? cityB : cityA;
     final cheapPrice = cheaper.priceFor(_sizeM2);
-    final dollarGap = costlier.priceFor(_sizeM2) - cheapPrice;
-    final maxPrice = costlier.priceFor(_sizeM2).toDouble();
+    final highPrice = costlier.priceFor(_sizeM2);
+    final dollarGap = highPrice - cheapPrice;
+    final maxPrice = highPrice.toDouble();
+    final times = formatTimes(highPrice, cheapPrice);
+    final thinNote = _thinSampleNote(cityA, cityB);
     final colors = Theme.of(context).colorScheme;
+    final text = Theme.of(context).textTheme;
 
     return Scaffold(
       appBar: AppBar(title: Text(formatM2(_sizeM2))),
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: PageInset.of(context),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Text(
+                cheaper.city,
+                textAlign: TextAlign.center,
+                style: text.labelLarge?.copyWith(
+                  color: colors.primary,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.6,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                formatUsd(dollarGap),
+                textAlign: TextAlign.center,
+                style: text.displaySmall?.copyWith(
+                  fontWeight: FontWeight.w300,
+                  letterSpacing: -1.4,
+                  height: 1.05,
+                  color: colors.onSurface,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                '${cheaper.city} is ${formatUsd(dollarGap)} cheaper',
+                textAlign: TextAlign.center,
+                style: text.titleMedium?.copyWith(
+                  color: colors.onSurfaceVariant,
+                ),
+              ),
+              if (times != 'about the same') ...[
+                const SizedBox(height: 6),
+                Text(
+                  '$times the ${cheaper.city} price',
+                  textAlign: TextAlign.center,
+                  style: text.bodyMedium?.copyWith(
+                    color: colors.onSurfaceVariant,
+                  ),
+                ),
+              ],
+              if (thinNote != null) ...[
+                const SizedBox(height: 10),
+                Text(
+                  thinNote,
+                  textAlign: TextAlign.center,
+                  style: text.bodySmall?.copyWith(color: colors.tertiary),
+                ),
+              ],
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: CityHeroCard(
+                      city: cityA,
+                      priceLabel: formatUsd(priceA),
+                      subtitle: cityA.rankLabelAmong(widget.catalog.cities),
+                      highlight: cityA.id == cheaper.id,
+                      height: 190,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: CityHeroCard(
+                      city: cityB,
+                      priceLabel: formatUsd(priceB),
+                      subtitle: cityB.rankLabelAmong(widget.catalog.cities),
+                      highlight: cityB.id == cheaper.id,
+                      height: 190,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Tap a photo to swipe through more listings',
+                textAlign: TextAlign.center,
+                style: text.bodySmall?.copyWith(
+                  color: colors.onSurfaceVariant,
+                ),
+              ),
+              const SizedBox(height: 24),
+              _PriceBar(
+                city: cityA,
+                price: priceA,
+                maxPrice: maxPrice,
+                highlight: cityA.id == cheaper.id,
+              ),
+              const SizedBox(height: 14),
+              _PriceBar(
+                city: cityB,
+                price: priceB,
+                maxPrice: maxPrice,
+                highlight: cityB.id == cheaper.id,
+              ),
+              const SizedBox(height: 24),
               Card.filled(
                 color: colors.surfaceContainerLow,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
                   child: SizeControl(
                     sizeM2: _sizeM2,
+                    defaultSize: widget.catalog.standardM2.round(),
                     onChanged: (value) => setState(() => _sizeM2 = value),
                   ),
                 ),
               ),
               const SizedBox(height: 16),
-              Text(
-                'Typical ${formatM2(_sizeM2)} condo',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              const SizedBox(height: 4),
-              Text(
-                '${cheaper.city} is ${formatUsd(dollarGap)} cheaper',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: colors.primary,
-                ),
-              ),
-              const SizedBox(height: 16),
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(
-                      child: _PriceCard(
-                        city: cityA,
-                        price: priceA,
-                        highlight: cityA.id == cheaper.id,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: _PriceCard(
-                        city: cityB,
-                        price: priceB,
-                        highlight: cityB.id == cheaper.id,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              _PriceBar(label: cityA.city, price: priceA, maxPrice: maxPrice),
-              const SizedBox(height: 10),
-              _PriceBar(label: cityB.city, price: priceB, maxPrice: maxPrice),
-              const SizedBox(height: 16),
               _StatsCard(cityA: cityA, cityB: cityB, sizeM2: _sizeM2),
+              const SizedBox(height: 12),
+              Text(
+                widget.catalog.method,
+                textAlign: TextAlign.center,
+                style: text.bodySmall?.copyWith(
+                  color: colors.onSurfaceVariant,
+                  height: 1.35,
+                ),
+              ),
+              const SizedBox(height: 8),
             ],
           ),
         ),
@@ -106,78 +176,79 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 }
 
-class _PriceCard extends StatelessWidget {
-  const _PriceCard({
+String? _thinSampleNote(Capital cityA, Capital cityB) {
+  final thin = [cityA, cityB].where((city) => city.indicative).toList();
+  if (thin.isEmpty) return null;
+  if (thin.length == 2) {
+    return 'Both prices use fewer than 200 listings, so treat them as indicative.';
+  }
+  final city = thin.first;
+  return '${city.city} uses ${formatListings(city.listingCount)}, so treat it as indicative.';
+}
+
+class _PriceBar extends StatelessWidget {
+  const _PriceBar({
     required this.city,
     required this.price,
+    required this.maxPrice,
     required this.highlight,
   });
 
   final Capital city;
   final int price;
+  final double maxPrice;
   final bool highlight;
 
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    return Card.filled(
-      color: highlight ? colors.primaryContainer : colors.surfaceContainerHighest,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(city.city, style: Theme.of(context).textTheme.titleMedium),
-            Text(
-              city.country,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: colors.onSurfaceVariant,
-              ),
-            ),
-            const Spacer(),
-            FittedBox(
-              fit: BoxFit.scaleDown,
-              alignment: Alignment.centerLeft,
-              child: Text(
-                formatUsd(price),
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _PriceBar extends StatelessWidget {
-  const _PriceBar({
-    required this.label,
-    required this.price,
-    required this.maxPrice,
-  });
-
-  final String label;
-  final int price;
-  final double maxPrice;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
+    final text = Theme.of(context).textTheme;
     final widthFactor = maxPrice == 0 ? 0.0 : price / maxPrice;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: Theme.of(context).textTheme.labelLarge),
-        const SizedBox(height: 6),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(99),
-          child: LinearProgressIndicator(
-            value: widthFactor.clamp(0.04, 1.0),
-            minHeight: 8,
-            backgroundColor: colors.surfaceContainerHighest,
-            color: colors.primary,
-          ),
+        Row(
+          children: [
+            SizedBox(
+              width: 28,
+              height: 28,
+              child: ListingPhoto(
+                url: city.heroPhoto,
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                city.city,
+                style: text.labelLarge?.copyWith(fontWeight: FontWeight.w600),
+              ),
+            ),
+            Text(
+              formatUsd(price),
+              style: text.labelLarge?.copyWith(
+                fontWeight: FontWeight.w500,
+                letterSpacing: -0.2,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        TweenAnimationBuilder<double>(
+          tween: Tween(begin: 0, end: widthFactor.clamp(0.04, 1.0)),
+          duration: const Duration(milliseconds: 700),
+          curve: Curves.easeOutCubic,
+          builder: (context, value, _) {
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(99),
+              child: LinearProgressIndicator(
+                value: value,
+                minHeight: 10,
+                backgroundColor: colors.surfaceContainerHighest,
+                color: highlight ? colors.primary : colors.outline,
+              ),
+            );
+          },
         ),
       ],
     );
@@ -210,11 +281,17 @@ class _StatsCard extends StatelessWidget {
             ),
             _StatRow(
               label: 'Listings',
-              left: formatCount(cityA.listingCount),
-              right: formatCount(cityB.listingCount),
+              left: formatSample(
+                cityA.listingCount,
+                indicative: cityA.indicative,
+              ),
+              right: formatSample(
+                cityB.listingCount,
+                indicative: cityB.indicative,
+              ),
             ),
             _StatRow(
-              label: 'Range',
+              label: 'Typical range',
               left:
                   '${formatUsd(cityA.rangeLowFor(sizeM2))}–${formatUsd(cityA.rangeHighFor(sizeM2))}',
               right:
@@ -241,7 +318,8 @@ class _StatRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final strong = Theme.of(context).textTheme.bodyMedium?.copyWith(
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w600,
+      letterSpacing: -0.2,
     );
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),

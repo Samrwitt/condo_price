@@ -63,8 +63,30 @@ class _CatalogGateState extends State<CatalogGate> {
           );
         }
         if (!snapshot.hasData) {
-          return const Scaffold(
-            body: Center(child: CircularProgressIndicator()),
+          final colors = Theme.of(context).colorScheme;
+          return Scaffold(
+            body: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(
+                      'assets/icon/app_icon.png',
+                      width: 64,
+                      height: 64,
+                      errorBuilder: (_, _, _) => Icon(
+                        Icons.home_rounded,
+                        size: 48,
+                        color: colors.primary,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const CircularProgressIndicator(),
+                ],
+              ),
+            ),
           );
         }
         return HomeScreen(catalog: snapshot.data!);

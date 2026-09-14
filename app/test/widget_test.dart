@@ -6,6 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 final _catalog = CapitalsCatalog(
   standardM2: 80,
   source: 'test',
+  coverage:
+      'Median condo prices for the 22 capitals in this listing set. London, Paris, Tokyo and New York are not in the source data.',
   cities: const [
     Capital(
       id: 'athens',
@@ -21,7 +23,7 @@ final _catalog = CapitalsCatalog(
       id: 'minsk',
       city: 'Minsk',
       country: 'Belarus',
-      listingCount: 5540,
+      listingCount: 4104,
       medianUsdPerM2: 1224.5,
       p25UsdPerM2: 1000,
       p75UsdPerM2: 1500,
@@ -31,11 +33,22 @@ final _catalog = CapitalsCatalog(
       id: 'prague',
       city: 'Prague',
       country: 'Czech Republic',
-      listingCount: 809,
+      listingCount: 718,
       medianUsdPerM2: 5622.8,
       p25UsdPerM2: 4800,
       p75UsdPerM2: 6500,
       price80m2: 449824,
+    ),
+    Capital(
+      id: 'rome',
+      city: 'Rome',
+      country: 'Italy',
+      listingCount: 57,
+      medianUsdPerM2: 11355.4,
+      p25UsdPerM2: 6000,
+      p75UsdPerM2: 16000,
+      price80m2: 908433,
+      indicative: true,
     ),
   ],
 );
@@ -50,10 +63,10 @@ Future<void> _openApp(WidgetTester tester) async {
 Future<void> _pickFromList(WidgetTester tester, Key fieldKey, String city) async {
   await tester.ensureVisible(find.byKey(fieldKey));
   await tester.tap(find.byKey(fieldKey));
-  await tester.pump();
-  expect(find.widgetWithText(ListTile, city), findsOneWidget);
-  await tester.tap(find.widgetWithText(ListTile, city));
-  await tester.pump();
+  await tester.pumpAndSettle();
+  expect(find.text(city), findsWidgets);
+  await tester.tap(find.text(city).last);
+  await tester.pumpAndSettle();
 }
 
 void main() {
@@ -61,6 +74,7 @@ void main() {
     await _openApp(tester);
 
     expect(find.text('Condo Compare'), findsOneWidget);
+    expect(find.textContaining('London, Paris, Tokyo and New York'), findsOneWidget);
     expect(find.text('Condo size'), findsOneWidget);
     expect(find.text('80 m²'), findsWidgets);
 
@@ -69,7 +83,7 @@ void main() {
 
     await tester.ensureVisible(find.widgetWithText(FilledButton, 'Compare'));
     await tester.tap(find.widgetWithText(FilledButton, 'Compare'));
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     expect(find.widgetWithText(AppBar, '80 m²'), findsOneWidget);
     expect(find.text('\$449,824'), findsWidgets);
@@ -89,7 +103,7 @@ void main() {
 
     await tester.ensureVisible(find.widgetWithText(FilledButton, 'Compare'));
     await tester.tap(find.widgetWithText(FilledButton, 'Compare'));
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     expect(find.widgetWithText(AppBar, '100 m²'), findsOneWidget);
     expect(find.text('\$562,280'), findsWidgets);
@@ -107,5 +121,24 @@ void main() {
     );
     expect(button.onPressed, isNull);
     expect(find.text('Pick two different cities'), findsOneWidget);
+  });
+
+  testWidgets('flags a thin sample as indicative', (tester) async {
+    await _openApp(tester);
+
+    await _pickFromList(tester, const ValueKey('city-a'), 'Prague');
+    await _pickFromList(tester, const ValueKey('city-b'), 'Rome');
+
+    expect(find.textContaining('indicative'), findsWidgets);
+
+    await tester.ensureVisible(find.widgetWithText(FilledButton, 'Compare'));
+    await tester.tap(find.widgetWithText(FilledButton, 'Compare'));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('57 listings · indicative'), findsWidgets);
+    expect(
+      find.textContaining('Rome uses 57 listings, so treat it as indicative'),
+      findsOneWidget,
+    );
   });
 }

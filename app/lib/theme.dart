@@ -26,14 +26,15 @@ ThemeData buildAppTheme() {
       scrolledUnderElevation: 0,
       centerTitle: false,
       titleTextStyle: textTheme.headlineSmall?.copyWith(
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
+        letterSpacing: -0.4,
       ),
     ),
     cardTheme: CardThemeData(
       elevation: 0,
       margin: EdgeInsets.zero,
       color: scheme.surfaceContainerLow,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(

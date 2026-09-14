@@ -30,3 +30,36 @@ String formatCount(int value) {
   }
   return buffer.toString();
 }
+
+String formatListings(int count) {
+  if (count == 1) return '1 listing';
+  return '${formatCount(count)} listings';
+}
+
+String formatSample(int count, {required bool indicative}) {
+  final listings = formatListings(count);
+  return indicative ? '$listings · indicative' : listings;
+}
+
+String formatOrdinal(int value) {
+  final tens = value % 100;
+  if (tens >= 11 && tens <= 13) return '${value}th';
+  return switch (value % 10) {
+    1 => '${value}st',
+    2 => '${value}nd',
+    3 => '${value}rd',
+    _ => '${value}th',
+  };
+}
+
+String formatTimes(num high, num low) {
+  if (low <= 0) return '';
+  final ratio = high / low;
+  if (ratio < 1.08) return 'about the same';
+  if (ratio >= 10) return '${ratio.round()}×';
+  final tenths = (ratio * 10).round() / 10;
+  final label = tenths == tenths.roundToDouble()
+      ? tenths.round().toString()
+      : tenths.toString();
+  return '$label×';
+}

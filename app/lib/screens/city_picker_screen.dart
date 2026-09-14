@@ -130,6 +130,8 @@ class _CityPickerScreenState extends State<CityPickerScreen> {
                       itemBuilder: (context, index) {
                         final city = matches[index];
                         final selected = city.id == widget.selectedId;
+                        final near = city.photosNear(widget.standardM2);
+                        final hero = near.isEmpty ? null : near.first.url;
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Material(
@@ -145,10 +147,11 @@ class _CityPickerScreenState extends State<CityPickerScreen> {
                                 child: Row(
                                   children: [
                                     GestureDetector(
-                                      onTap: city.photos.length > 1
+                                      onTap: near.length > 1
                                           ? () => openCityPhotoGallery(
                                                 context,
                                                 city: city,
+                                                sizeM2: widget.standardM2,
                                               )
                                           : null,
                                       child: Stack(
@@ -157,12 +160,12 @@ class _CityPickerScreenState extends State<CityPickerScreen> {
                                             width: 72,
                                             height: 72,
                                             child: ListingPhoto(
-                                              url: city.heroPhoto,
+                                              url: hero,
                                               borderRadius:
                                                   BorderRadius.circular(14),
                                             ),
                                           ),
-                                          if (city.photos.length > 1)
+                                          if (near.length > 1)
                                             Positioned(
                                               right: 4,
                                               bottom: 4,
@@ -179,7 +182,7 @@ class _CityPickerScreenState extends State<CityPickerScreen> {
                                                       BorderRadius.circular(999),
                                                 ),
                                                 child: Text(
-                                                  '${city.photos.length}',
+                                                  '${near.length}',
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .labelSmall

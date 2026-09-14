@@ -312,22 +312,40 @@ def assert_location_examples() -> None:
 
 
 PHOTOS_PER_CITY = 4
+PHOTO_POOL_SIZE = 24
 
 
-def pick_photos(listings: list[dict], median: float, limit: int = PHOTOS_PER_CITY) -> list[str]:
-    """Prefer photos from listings closest to the city median price/m²."""
-    ranked = sorted(listings, key=lambda item: abs(item["ppm2"] - median))
-    photos: list[str] = []
-    seen: set[str] = set()
-    for item in ranked:
-        url = item["image"]
-        if not url or url in seen:
+def pick_photo_pool(listings: list[dict], limit: int = PHOTO_POOL_SIZE) -> list[dict]:
+    """Keep a spread of listing photos across sizes so the app can match the slider."""
+    by_url: dict[str, dict] = {}
+    for item in listings:
+        url = item.get("image") or ""
+        if not url:
             continue
-        photos.append(url)
-        seen.add(url)
-        if len(photos) >= limit:
-            break
-    return photos
+        previous = by_url.get(url)
+        if previous is None or abs(item["area"] - STANDARD_M2) < abs(
+            previous["m2"] - STANDARD_M2
+        ):
+            by_url[url] = {
+                "url": url,
+                "m2": round(item["area"], 1),
+            }
+
+    unique = sorted(by_url.values(), key=lambda item: item["m2"])
+    if len(unique) <= limit:
+        return unique
+
+    # Evenly sample across the area range so small and large condos are covered.
+    picks: list[dict] = []
+    seen: set[str] = set()
+    for i in range(limit):
+        index = round(i * (len(unique) - 1) / (limit - 1))
+        photo = unique[index]
+        if photo["url"] in seen:
+            continue
+        picks.append(photo)
+        seen.add(photo["url"])
+    return picks
 
 
 def build() -> list[dict]:
@@ -363,6 +381,7 @@ def build() -> list[dict]:
             buckets[country].append(
                 {
                     "ppm2": price / area,
+                    "area": area,
                     "image": image,
                 }
             )
@@ -386,7 +405,7 @@ def build() -> list[dict]:
                 "p25UsdPerM2": round(percentile(values, 0.25), 1),
                 "p75UsdPerM2": round(percentile(values, 0.75), 1),
                 "price80m2": int(round(median * STANDARD_M2)),
-                "photos": pick_photos(listings, median),
+                "photos": pick_photo_pool(listings),
             }
         )
 

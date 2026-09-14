@@ -95,6 +95,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   Expanded(
                     child: CityHeroCard(
                       city: cityA,
+                      sizeM2: _sizeM2,
                       priceLabel: formatUsd(priceA),
                       subtitle: cityA.rankLabelAmong(widget.catalog.cities),
                       highlight: cityA.id == cheaper.id,
@@ -105,6 +106,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   Expanded(
                     child: CityHeroCard(
                       city: cityB,
+                      sizeM2: _sizeM2,
                       priceLabel: formatUsd(priceB),
                       subtitle: cityB.rankLabelAmong(widget.catalog.cities),
                       highlight: cityB.id == cheaper.id,
@@ -115,7 +117,7 @@ class _ResultScreenState extends State<ResultScreen> {
               ),
               const SizedBox(height: 10),
               Text(
-                'Tap a photo to swipe through more listings',
+                'Tap a photo to swipe listings near ${formatM2(_sizeM2)}',
                 textAlign: TextAlign.center,
                 style: text.bodySmall?.copyWith(
                   color: colors.onSurfaceVariant,
@@ -125,6 +127,7 @@ class _ResultScreenState extends State<ResultScreen> {
               _PriceBar(
                 city: cityA,
                 price: priceA,
+                sizeM2: _sizeM2,
                 maxPrice: maxPrice,
                 highlight: cityA.id == cheaper.id,
               ),
@@ -132,6 +135,7 @@ class _ResultScreenState extends State<ResultScreen> {
               _PriceBar(
                 city: cityB,
                 price: priceB,
+                sizeM2: _sizeM2,
                 maxPrice: maxPrice,
                 highlight: cityB.id == cheaper.id,
               ),
@@ -162,12 +166,14 @@ class _PriceBar extends StatelessWidget {
   const _PriceBar({
     required this.city,
     required this.price,
+    required this.sizeM2,
     required this.maxPrice,
     required this.highlight,
   });
 
   final Capital city;
   final int price;
+  final int sizeM2;
   final double maxPrice;
   final bool highlight;
 
@@ -185,7 +191,7 @@ class _PriceBar extends StatelessWidget {
               width: 28,
               height: 28,
               child: ListingPhoto(
-                url: city.heroPhoto,
+                url: city.heroPhotoFor(sizeM2),
                 borderRadius: BorderRadius.circular(8),
               ),
             ),

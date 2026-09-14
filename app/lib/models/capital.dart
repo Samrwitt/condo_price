@@ -1,5 +1,26 @@
 import '../format.dart';
 
+class ListingPhotoRef {
+  const ListingPhotoRef({
+    required this.url,
+    required this.m2,
+  });
+
+  final String url;
+  final double m2;
+
+  factory ListingPhotoRef.fromJson(Object? json) {
+    if (json is String) {
+      return ListingPhotoRef(url: json, m2: 80);
+    }
+    final map = json as Map<String, dynamic>;
+    return ListingPhotoRef(
+      url: map['url'] as String,
+      m2: (map['m2'] as num).toDouble(),
+    );
+  }
+}
+
 class Capital {
   const Capital({
     required this.id,
@@ -23,15 +44,37 @@ class Capital {
   final double p75UsdPerM2;
   final int price80m2;
   final bool indicative;
-  final List<String> photos;
-
-  String? get heroPhoto => photos.isEmpty ? null : photos.first;
+  final List<ListingPhotoRef> photos;
 
   int priceFor(num m2) => (medianUsdPerM2 * m2).round();
   int rangeLowFor(num m2) => (p25UsdPerM2 * m2).round();
   int rangeHighFor(num m2) => (p75UsdPerM2 * m2).round();
 
   String get label => '$city, $country';
+
+  /// Photos from listings closest to [sizeM2], for thumbnails and gallery.
+  List<ListingPhotoRef> photosNear(num sizeM2, {int limit = 4}) {
+    if (photos.isEmpty) return const [];
+    final ranked = [...photos]
+      ..sort((a, b) {
+        final byArea = (a.m2 - sizeM2).abs().compareTo((b.m2 - sizeM2).abs());
+        if (byArea != 0) return byArea;
+        return a.url.compareTo(b.url);
+      });
+    final picked = <ListingPhotoRef>[];
+    final seen = <String>{};
+    for (final photo in ranked) {
+      if (!seen.add(photo.url)) continue;
+      picked.add(photo);
+      if (picked.length >= limit) break;
+    }
+    return picked;
+  }
+
+  String? heroPhotoFor(num sizeM2) {
+    final near = photosNear(sizeM2, limit: 1);
+    return near.isEmpty ? null : near.first.url;
+  }
 
   int cheapestRankAmong(List<Capital> cities) {
     final ordered = [...cities]
@@ -47,8 +90,8 @@ class Capital {
   factory Capital.fromJson(Map<String, dynamic> json) {
     final listingCount = json['listingCount'] as int;
     final photos = (json['photos'] as List<dynamic>? ?? const [])
-        .map((item) => item as String)
-        .where((url) => url.isNotEmpty)
+        .map(ListingPhotoRef.fromJson)
+        .where((photo) => photo.url.isNotEmpty)
         .toList();
     return Capital(
       id: json['id'] as String,

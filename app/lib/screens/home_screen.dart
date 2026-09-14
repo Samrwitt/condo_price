@@ -114,6 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         fieldKey: const ValueKey('city-a'),
                         badge: 'A',
                         city: _cityA,
+                        sizeM2: _sizeM2,
                         placeholder: 'City A',
                         onTap: () => _pickCity(isA: true),
                       ),
@@ -128,6 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         fieldKey: const ValueKey('city-b'),
                         badge: 'B',
                         city: _cityB,
+                        sizeM2: _sizeM2,
                         placeholder: 'City B',
                         onTap: () => _pickCity(isA: false),
                       ),
@@ -204,6 +206,7 @@ class _LivePreview extends StatelessWidget {
         Expanded(
           child: CityHeroCard(
             city: cityA,
+            sizeM2: sizeM2,
             priceLabel: formatUsd(priceA),
             subtitle: formatSample(cityA.listingCount),
             highlight: priceA <= priceB,
@@ -214,6 +217,7 @@ class _LivePreview extends StatelessWidget {
         Expanded(
           child: CityHeroCard(
             city: cityB,
+            sizeM2: sizeM2,
             priceLabel: formatUsd(priceB),
             subtitle: formatSample(cityB.listingCount),
             highlight: priceB < priceA,
@@ -230,6 +234,7 @@ class _CityField extends StatelessWidget {
     required this.fieldKey,
     required this.badge,
     required this.city,
+    required this.sizeM2,
     required this.placeholder,
     required this.onTap,
   });
@@ -237,12 +242,15 @@ class _CityField extends StatelessWidget {
   final Key fieldKey;
   final String badge;
   final Capital? city;
+  final int sizeM2;
   final String placeholder;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+    final hero = city?.heroPhotoFor(sizeM2);
+    final nearCount = city?.photosNear(sizeM2).length ?? 0;
     return Material(
       color: colors.surface,
       borderRadius: BorderRadius.circular(16),
@@ -254,10 +262,14 @@ class _CityField extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(10, 10, 14, 10),
           child: Row(
             children: [
-              if (city?.heroPhoto != null)
+              if (hero != null)
                 GestureDetector(
-                  onTap: city!.photos.length > 1
-                      ? () => openCityPhotoGallery(context, city: city!)
+                  onTap: nearCount > 1
+                      ? () => openCityPhotoGallery(
+                            context,
+                            city: city!,
+                            sizeM2: sizeM2,
+                          )
                       : null,
                   child: Stack(
                     children: [
@@ -265,11 +277,11 @@ class _CityField extends StatelessWidget {
                         width: 56,
                         height: 56,
                         child: ListingPhoto(
-                          url: city!.heroPhoto,
+                          url: hero,
                           borderRadius: BorderRadius.circular(14),
                         ),
                       ),
-                      if (city!.photos.length > 1)
+                      if (nearCount > 1)
                         Positioned(
                           right: 3,
                           bottom: 3,
@@ -283,7 +295,7 @@ class _CityField extends StatelessWidget {
                               borderRadius: BorderRadius.circular(999),
                             ),
                             child: Text(
-                              '${city!.photos.length}',
+                              '$nearCount',
                               style: Theme.of(context)
                                   .textTheme
                                   .labelSmall

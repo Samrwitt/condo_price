@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../flags.dart';
+import '../format.dart';
 import '../models/capital.dart';
 
 class ListingPhoto extends StatelessWidget {
@@ -57,16 +58,20 @@ class ListingPhoto extends StatelessWidget {
 Future<void> openCityPhotoGallery(
   BuildContext context, {
   required Capital city,
+  required int sizeM2,
   int initialIndex = 0,
 }) async {
-  if (city.photos.isEmpty) return;
+  final photos = city.photosNear(sizeM2);
+  if (photos.isEmpty) return;
   await showModalBottomSheet<void>(
     context: context,
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
     builder: (context) => _CityPhotoGallery(
       city: city,
-      initialIndex: initialIndex.clamp(0, city.photos.length - 1),
+      sizeM2: sizeM2,
+      photos: photos,
+      initialIndex: initialIndex.clamp(0, photos.length - 1),
     ),
   );
 }
@@ -74,10 +79,14 @@ Future<void> openCityPhotoGallery(
 class _CityPhotoGallery extends StatefulWidget {
   const _CityPhotoGallery({
     required this.city,
+    required this.sizeM2,
+    required this.photos,
     required this.initialIndex,
   });
 
   final Capital city;
+  final int sizeM2;
+  final List<ListingPhotoRef> photos;
   final int initialIndex;
 
   @override
@@ -105,7 +114,8 @@ class _CityPhotoGalleryState extends State<_CityPhotoGallery> {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final text = Theme.of(context).textTheme;
-    final photos = widget.city.photos;
+    final photos = widget.photos;
+    final current = photos[_index];
     final height = MediaQuery.sizeOf(context).height * 0.72;
 
     return Container(
@@ -140,7 +150,7 @@ class _CityPhotoGalleryState extends State<_CityPhotoGallery> {
                         ),
                       ),
                       Text(
-                        'Near-median listings · ${_index + 1} of ${photos.length}',
+                        'Near ${formatM2(widget.sizeM2)} · listing ${formatM2(current.m2)} · ${_index + 1} of ${photos.length}',
                         style: text.bodySmall?.copyWith(
                           color: colors.onSurfaceVariant,
                         ),
@@ -164,7 +174,7 @@ class _CityPhotoGalleryState extends State<_CityPhotoGallery> {
                 return Padding(
                   padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
                   child: ListingPhoto(
-                    url: photos[index],
+                    url: photos[index].url,
                     borderRadius: BorderRadius.circular(20),
                   ),
                 );
@@ -203,6 +213,7 @@ class CityHeroCard extends StatelessWidget {
   const CityHeroCard({
     super.key,
     required this.city,
+    required this.sizeM2,
     required this.priceLabel,
     this.subtitle,
     this.highlight = false,
@@ -211,6 +222,7 @@ class CityHeroCard extends StatelessWidget {
   });
 
   final Capital city;
+  final int sizeM2;
   final String priceLabel;
   final String? subtitle;
   final bool highlight;
@@ -221,6 +233,8 @@ class CityHeroCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final text = Theme.of(context).textTheme;
+    final near = city.photosNear(sizeM2);
+    final hero = near.isEmpty ? null : near.first.url;
     final card = ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: SizedBox(
@@ -228,7 +242,7 @@ class CityHeroCard extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            ListingPhoto(url: city.heroPhoto),
+            ListingPhoto(url: hero),
             DecoratedBox(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -261,7 +275,7 @@ class CityHeroCard extends StatelessWidget {
                   ),
                 ),
               ),
-            if (city.photos.length > 1)
+            if (near.length > 1)
               Positioned(
                 top: 10,
                 left: 10,
@@ -273,7 +287,7 @@ class CityHeroCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(999),
                   ),
                   child: Text(
-                    '1/${city.photos.length}',
+                    '1/${near.length}',
                     style: text.labelSmall?.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
@@ -326,9 +340,13 @@ class CityHeroCard extends StatelessWidget {
       ),
     );
 
-    if (!openGalleryOnTap || city.photos.isEmpty) return card;
+    if (!openGalleryOnTap || near.isEmpty) return card;
     return GestureDetector(
-      onTap: () => openCityPhotoGallery(context, city: city),
+      onTap: () => openCityPhotoGallery(
+        context,
+        city: city,
+        sizeM2: sizeM2,
+      ),
       child: card,
     );
   }

@@ -208,7 +208,7 @@ class _LivePreview extends StatelessWidget {
             city: cityA,
             sizeM2: sizeM2,
             priceLabel: formatUsd(priceA),
-            subtitle: _previewSubtitle(cityA, sizeM2),
+            subtitle: formatSample(cityA.listingCount),
             highlight: priceA <= priceB,
             height: 148,
           ),
@@ -219,20 +219,13 @@ class _LivePreview extends StatelessWidget {
             city: cityB,
             sizeM2: sizeM2,
             priceLabel: formatUsd(priceB),
-            subtitle: _previewSubtitle(cityB, sizeM2),
+            subtitle: formatSample(cityB.listingCount),
             highlight: priceB < priceA,
             height: 148,
           ),
         ),
       ],
     );
-  }
-
-  String _previewSubtitle(Capital city, int sizeM2) {
-    final model = city.modelPriceFor(sizeM2);
-    final listings = formatSample(city.listingCount);
-    if (model == null) return listings;
-    return 'Model ${formatUsd(model)} · $listings';
   }
 }
 

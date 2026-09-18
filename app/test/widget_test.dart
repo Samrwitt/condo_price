@@ -191,9 +191,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.textContaining('Median'), findsWidgets);
-    expect(find.textContaining('Model'), findsWidgets);
-    expect(find.text('Median USD / m²'), findsOneWidget);
-    expect(find.text('Model price'), findsOneWidget);
-    expect(find.textContaining('Why model differs'), findsOneWidget);
+    expect(find.textContaining('Prediction'), findsWidgets);
+    expect(find.text('Median'), findsOneWidget);
+    expect(find.text('Prediction'), findsOneWidget);
   });
 }

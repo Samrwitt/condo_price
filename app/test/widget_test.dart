@@ -136,4 +136,63 @@ void main() {
     expect(find.textContaining('57 listings'), findsWidgets);
     expect(find.textContaining('indicative'), findsNothing);
   });
+
+  testWidgets('shows median and model prices when a city has a model',
+      (tester) async {
+    final modeled = CapitalsCatalog(
+      standardM2: 80,
+      source: 'test',
+      cities: [
+        Capital(
+          id: 'minsk',
+          city: 'Minsk',
+          country: 'Belarus',
+          listingCount: 4104,
+          medianUsdPerM2: 1224.5,
+          p25UsdPerM2: 1000,
+          p75UsdPerM2: 1500,
+          price80m2: 97959,
+          model: PriceModel(
+            n: 4104,
+            weights: List<double>.filled(15, 0),
+            mean: List<double>.filled(15, 0),
+            std: List<double>.filled(15, 1),
+            defaults: const {
+              'rooms': 2,
+              'bedrooms': 1,
+              'bathrooms': 1,
+              'year': 2010,
+              'building_floors': 5,
+              'apartment_floor': 2,
+            },
+            profile: const {
+              'rooms': 2,
+              'bedrooms': 1,
+              'bathrooms': 1,
+              'year': 2010,
+              'building_floors': 5,
+              'apartment_floor': 2,
+            },
+          ),
+        ),
+        _catalog.cities[2],
+      ],
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(home: HomeScreen(catalog: modeled)),
+    );
+    await tester.pump();
+
+    await _pickFromList(tester, const ValueKey('city-a'), 'Prague');
+    await _pickFromList(tester, const ValueKey('city-b'), 'Minsk');
+    await tester.ensureVisible(find.widgetWithText(FilledButton, 'Compare'));
+    await tester.tap(find.widgetWithText(FilledButton, 'Compare'));
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('Median'), findsWidgets);
+    expect(find.textContaining('Model'), findsWidgets);
+    expect(find.text('Median USD / m²'), findsOneWidget);
+    expect(find.text('Model price'), findsOneWidget);
+  });
 }

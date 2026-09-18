@@ -330,7 +330,96 @@
           "url": "https://realting.com/uploads/bigSlider/d66/db9c585a2d2c903f991b2ac771439.webp",
           "m2": 375.0
         }
-      ]
+      ],
+      "model": {
+        "type": "linear_log_ppm2",
+        "loss": "mse_log_ppm2",
+        "n": 816,
+        "features": [
+          "bias",
+          "area",
+          "log_area",
+          "rooms",
+          "rooms_missing",
+          "bedrooms",
+          "bedrooms_missing",
+          "bathrooms",
+          "bathrooms_missing",
+          "year",
+          "year_missing",
+          "building_floors",
+          "building_floors_missing",
+          "apartment_floor",
+          "apartment_floor_missing"
+        ],
+        "weights": [
+          8.10683116,
+          0.12029852,
+          -0.11354723,
+          0.02426302,
+          -0.10107424,
+          -0.06281141,
+          -0.09707046,
+          0.05222902,
+          0.22216146,
+          0.10901786,
+          0.01430997,
+          0.03211921,
+          0.03005061,
+          0.00652477,
+          -0.05835907
+        ],
+        "mean": [
+          0.0,
+          106.52818627,
+          4.56315664,
+          3.21078431,
+          0.17769608,
+          2.25122549,
+          0.14583333,
+          1.14093137,
+          0.4129902,
+          1987.79534314,
+          0.57598039,
+          1.24142157,
+          0.25245098,
+          2.94117647,
+          0.32965686
+        ],
+        "std": [
+          1.0,
+          51.74604929,
+          0.46069336,
+          0.96871725,
+          0.3822567,
+          0.84995586,
+          0.35293905,
+          0.42123897,
+          0.49237109,
+          12.68649227,
+          0.49419326,
+          0.9773413,
+          0.43441856,
+          1.49229084,
+          0.47008852
+        ],
+        "defaults": {
+          "rooms": 3.0,
+          "bedrooms": 2.0,
+          "bathrooms": 1.0,
+          "year": 1985.0,
+          "building_floors": 1.0,
+          "apartment_floor": 3.0
+        },
+        "profile": {
+          "rooms": 3.0,
+          "bedrooms": 2.0,
+          "bathrooms": 1.0,
+          "year": 1982.0,
+          "building_floors": 1.0,
+          "apartment_floor": 3.0
+        }
+      }
     },
     {
       "id": "bangkok",
@@ -657,7 +746,96 @@
           "url": "https://realting.com/uploads/bigSlider/c33/8c3721cf38c0f.webp",
           "m2": 400.0
         }
-      ]
+      ],
+      "model": {
+        "type": "linear_log_ppm2",
+        "loss": "mse_log_ppm2",
+        "n": 3385,
+        "features": [
+          "bias",
+          "area",
+          "log_area",
+          "rooms",
+          "rooms_missing",
+          "bedrooms",
+          "bedrooms_missing",
+          "bathrooms",
+          "bathrooms_missing",
+          "year",
+          "year_missing",
+          "building_floors",
+          "building_floors_missing",
+          "apartment_floor",
+          "apartment_floor_missing"
+        ],
+        "weights": [
+          7.97551449,
+          0.00661382,
+          -0.00888152,
+          -0.00706529,
+          0.00561842,
+          -0.0034754,
+          -0.01188127,
+          0.08030792,
+          0.00800751,
+          0.00794368,
+          0.11536589,
+          -0.00454163,
+          -0.00440019,
+          -0.00452323,
+          -0.00182339
+        ],
+        "mean": [
+          0.0,
+          70.91255539,
+          4.15786384,
+          2.50132939,
+          0.1633678,
+          1.99970458,
+          0.99645495,
+          1.21004431,
+          0.01713442,
+          1960.15568685,
+          0.83929099,
+          4.00029542,
+          0.99911374,
+          2.01004431,
+          0.97193501
+        ],
+        "std": [
+          1.0,
+          34.90420787,
+          0.45239134,
+          1.08245632,
+          0.36970091,
+          0.0297687,
+          0.05943471,
+          0.50745069,
+          0.12977222,
+          21.46175846,
+          0.36726234,
+          0.01718528,
+          0.02975697,
+          0.21305854,
+          0.16515856
+        ],
+        "defaults": {
+          "rooms": 2.0,
+          "bedrooms": 2.0,
+          "bathrooms": 1.0,
+          "year": 1960.0,
+          "building_floors": 4.0,
+          "apartment_floor": 2.0
+        },
+        "profile": {
+          "rooms": 3.0,
+          "bedrooms": 2.0,
+          "bathrooms": 1.0,
+          "year": 1985.0,
+          "building_floors": 4.0,
+          "apartment_floor": 2.0
+        }
+      }
     },
     {
       "id": "helsinki",
@@ -1093,7 +1271,96 @@
           "url": "https://realting.com/uploads/bigSlider/a48/174488dd1fa3f.webp",
           "m2": 391.0
         }
-      ]
+      ],
+      "model": {
+        "type": "linear_log_ppm2",
+        "loss": "mse_log_ppm2",
+        "n": 4104,
+        "features": [
+          "bias",
+          "area",
+          "log_area",
+          "rooms",
+          "rooms_missing",
+          "bedrooms",
+          "bedrooms_missing",
+          "bathrooms",
+          "bathrooms_missing",
+          "year",
+          "year_missing",
+          "building_floors",
+          "building_floors_missing",
+          "apartment_floor",
+          "apartment_floor_missing"
+        ],
+        "weights": [
+          7.2103184,
+          0.05281606,
+          0.07339751,
+          -0.13152486,
+          -0.21698524,
+          -0.0123854,
+          -0.01055466,
+          0.02225139,
+          -0.00283739,
+          -0.01817288,
+          0.01413666,
+          0.000345,
+          0.01800915,
+          0.01306114,
+          0.0361348
+        ],
+        "mean": [
+          0.0,
+          61.85745614,
+          4.0520228,
+          2.38767057,
+          0.02436647,
+          2.00219298,
+          0.97807018,
+          1.00609162,
+          0.97490253,
+          2004.82797271,
+          0.02607212,
+          15.20833333,
+          0.0082846,
+          7.50048733,
+          0.00682261
+        ],
+        "std": [
+          1.0,
+          28.17572094,
+          0.36266248,
+          0.88249935,
+          0.15418413,
+          0.13872528,
+          0.14645445,
+          0.08088164,
+          0.15642117,
+          22.72868702,
+          0.15934983,
+          7.84907084,
+          0.09064196,
+          5.98422225,
+          0.08231685
+        ],
+        "defaults": {
+          "rooms": 2.0,
+          "bedrooms": 2.0,
+          "bathrooms": 1.0,
+          "year": 2017.0,
+          "building_floors": 15.0,
+          "apartment_floor": 5.0
+        },
+        "profile": {
+          "rooms": 3.0,
+          "bedrooms": 2.0,
+          "bathrooms": 1.0,
+          "year": 2015.0,
+          "building_floors": 14.0,
+          "apartment_floor": 5.0
+        }
+      }
     },
     {
       "id": "moscow",
@@ -1202,7 +1469,96 @@
           "url": "/property-for-sale/russia/ooo-fon/540718",
           "m2": 370.0
         }
-      ]
+      ],
+      "model": {
+        "type": "linear_log_ppm2",
+        "loss": "mse_log_ppm2",
+        "n": 1451,
+        "features": [
+          "bias",
+          "area",
+          "log_area",
+          "rooms",
+          "rooms_missing",
+          "bedrooms",
+          "bedrooms_missing",
+          "bathrooms",
+          "bathrooms_missing",
+          "year",
+          "year_missing",
+          "building_floors",
+          "building_floors_missing",
+          "apartment_floor",
+          "apartment_floor_missing"
+        ],
+        "weights": [
+          8.20062461,
+          -0.11208715,
+          0.12164678,
+          -0.08308225,
+          -0.10461295,
+          0.0196972,
+          -0.0974324,
+          -0.02465438,
+          0.07010787,
+          0.03676856,
+          -0.09173454,
+          -0.12786249,
+          0.1803136,
+          -0.04509459,
+          0.07543661
+        ],
+        "mean": [
+          0.0,
+          59.60923501,
+          3.99840322,
+          2.22122674,
+          0.00482426,
+          2.0,
+          0.98139214,
+          1.15713301,
+          0.26050999,
+          2023.869745,
+          0.09786354,
+          25.60372157,
+          0.06133701,
+          14.69745003,
+          0.23569952
+        ],
+        "std": [
+          1.0,
+          27.32449713,
+          0.42253759,
+          0.98085963,
+          0.06928915,
+          0.14378942,
+          0.1351355,
+          0.37694926,
+          0.4389129,
+          5.79124448,
+          0.29713005,
+          8.11228658,
+          0.23994745,
+          7.02757101,
+          0.42443522
+        ],
+        "defaults": {
+          "rooms": 2.0,
+          "bedrooms": 2.0,
+          "bathrooms": 1.0,
+          "year": 2025.0,
+          "building_floors": 30.0,
+          "apartment_floor": 14.0
+        },
+        "profile": {
+          "rooms": 3.0,
+          "bedrooms": 2.0,
+          "bathrooms": 1.0,
+          "year": 2025.0,
+          "building_floors": 30.0,
+          "apartment_floor": 13.0
+        }
+      }
     },
     {
       "id": "podgorica",
@@ -1420,7 +1776,96 @@
           "url": "https://realting.com/uploads/bigSlider/96c/34986874b783b.webp",
           "m2": 338.0
         }
-      ]
+      ],
+      "model": {
+        "type": "linear_log_ppm2",
+        "loss": "mse_log_ppm2",
+        "n": 718,
+        "features": [
+          "bias",
+          "area",
+          "log_area",
+          "rooms",
+          "rooms_missing",
+          "bedrooms",
+          "bedrooms_missing",
+          "bathrooms",
+          "bathrooms_missing",
+          "year",
+          "year_missing",
+          "building_floors",
+          "building_floors_missing",
+          "apartment_floor",
+          "apartment_floor_missing"
+        ],
+        "weights": [
+          8.66868572,
+          0.05594806,
+          -0.12751864,
+          0.02725564,
+          -0.03433008,
+          0.01811685,
+          -0.02443657,
+          0.0,
+          -0.00218078,
+          0.01281709,
+          -0.01103702,
+          -0.00128699,
+          0.06158035,
+          0.0199644,
+          -0.07540515
+        ],
+        "mean": [
+          0.0,
+          57.6908078,
+          3.93367525,
+          2.74373259,
+          0.01949861,
+          1.9637883,
+          0.04874652,
+          1.0,
+          0.99582173,
+          2023.00557103,
+          0.98328691,
+          5.03064067,
+          0.98050139,
+          2.00835655,
+          0.96657382
+        ],
+        "std": [
+          1.0,
+          31.43094654,
+          0.48432554,
+          0.91020736,
+          0.13826934,
+          0.83370711,
+          0.21533763,
+          1.0,
+          0.06450438,
+          0.07443114,
+          0.12819425,
+          0.46211019,
+          0.13826934,
+          0.24171469,
+          0.17974669
+        ],
+        "defaults": {
+          "rooms": 3.0,
+          "bedrooms": 2.0,
+          "bathrooms": 1.0,
+          "year": 2023.0,
+          "building_floors": 5.0,
+          "apartment_floor": 2.0
+        },
+        "profile": {
+          "rooms": 3.0,
+          "bedrooms": 3.0,
+          "bathrooms": 1.0,
+          "year": 2023.0,
+          "building_floors": 5.0,
+          "apartment_floor": 1.0
+        }
+      }
     },
     {
       "id": "riga",
@@ -1529,7 +1974,96 @@
           "url": "https://realting.com/uploads/bigSlider/d1d/0f8221ed641a2fee78fb5ba182169.webp",
           "m2": 400.0
         }
-      ]
+      ],
+      "model": {
+        "type": "linear_log_ppm2",
+        "loss": "mse_log_ppm2",
+        "n": 909,
+        "features": [
+          "bias",
+          "area",
+          "log_area",
+          "rooms",
+          "rooms_missing",
+          "bedrooms",
+          "bedrooms_missing",
+          "bathrooms",
+          "bathrooms_missing",
+          "year",
+          "year_missing",
+          "building_floors",
+          "building_floors_missing",
+          "apartment_floor",
+          "apartment_floor_missing"
+        ],
+        "weights": [
+          8.04964071,
+          -0.10665125,
+          0.09688583,
+          -0.02439799,
+          -0.02208616,
+          -0.11924422,
+          -0.04865294,
+          0.17214295,
+          0.11366117,
+          0.03883246,
+          -0.07844108,
+          -0.00388117,
+          -0.11831244,
+          -0.02039493,
+          0.14948484
+        ],
+        "mean": [
+          0.0,
+          113.40484048,
+          4.59877198,
+          3.26072607,
+          0.00880088,
+          2.10231023,
+          0.33553355,
+          1.75467547,
+          0.37293729,
+          2014.14961496,
+          0.67766777,
+          6.30583058,
+          0.63256326,
+          4.18921892,
+          0.62376238
+        ],
+        "std": [
+          1.0,
+          58.93572993,
+          0.52784307,
+          1.12145195,
+          0.09339928,
+          0.81614966,
+          0.47217665,
+          0.57092424,
+          0.48358564,
+          20.99582578,
+          0.46736941,
+          2.64782517,
+          0.48210682,
+          2.13809657,
+          0.48444079
+        ],
+        "defaults": {
+          "rooms": 3.0,
+          "bedrooms": 2.0,
+          "bathrooms": 2.0,
+          "year": 2019.0,
+          "building_floors": 6.0,
+          "apartment_floor": 4.0
+        },
+        "profile": {
+          "rooms": 3.0,
+          "bedrooms": 2.0,
+          "bathrooms": 1.0,
+          "year": 2020.0,
+          "building_floors": 6.0,
+          "apartment_floor": 3.0
+        }
+      }
     },
     {
       "id": "rome",
@@ -1747,7 +2281,96 @@
           "url": "https://realting.com/uploads/bigSlider/a24/2a133ed7b3de7f4420ebbfd649c3e.webp",
           "m2": 330.0
         }
-      ]
+      ],
+      "model": {
+        "type": "linear_log_ppm2",
+        "loss": "mse_log_ppm2",
+        "n": 1464,
+        "features": [
+          "bias",
+          "area",
+          "log_area",
+          "rooms",
+          "rooms_missing",
+          "bedrooms",
+          "bedrooms_missing",
+          "bathrooms",
+          "bathrooms_missing",
+          "year",
+          "year_missing",
+          "building_floors",
+          "building_floors_missing",
+          "apartment_floor",
+          "apartment_floor_missing"
+        ],
+        "weights": [
+          7.23270221,
+          0.04095145,
+          0.07032825,
+          -0.05410786,
+          0.05616207,
+          -0.01699848,
+          -0.0065754,
+          -0.00944691,
+          -0.05224201,
+          -0.05982505,
+          -0.00695735,
+          -0.07563937,
+          -0.00265327,
+          -0.00752245,
+          0.04357289
+        ],
+        "mean": [
+          0.0,
+          69.23155738,
+          4.13760512,
+          2.10519126,
+          0.10314208,
+          1.18101093,
+          0.66666667,
+          1.12090164,
+          0.59562842,
+          2022.23838798,
+          0.50956284,
+          12.16530055,
+          0.00068306,
+          7.62363388,
+          0.00273224
+        ],
+        "std": [
+          1.0,
+          36.35530213,
+          0.42477403,
+          0.87066669,
+          0.30414435,
+          0.43185338,
+          0.47140452,
+          0.3521988,
+          0.49077001,
+          0.66417015,
+          0.49990854,
+          3.88196732,
+          0.02612649,
+          4.44483662,
+          0.05219938
+        ],
+        "defaults": {
+          "rooms": 2.0,
+          "bedrooms": 1.0,
+          "bathrooms": 1.0,
+          "year": 2022.0,
+          "building_floors": 15.0,
+          "apartment_floor": 7.0
+        },
+        "profile": {
+          "rooms": 3.0,
+          "bedrooms": 2.0,
+          "bathrooms": 1.0,
+          "year": 2022.0,
+          "building_floors": 12.0,
+          "apartment_floor": 6.0
+        }
+      }
     },
     {
       "id": "tbilisi",
@@ -1856,7 +2479,96 @@
           "url": "https://realting.com/uploads/bigSlider/968/6c7b9c6e13123.webp",
           "m2": 380.0
         }
-      ]
+      ],
+      "model": {
+        "type": "linear_log_ppm2",
+        "loss": "mse_log_ppm2",
+        "n": 212,
+        "features": [
+          "bias",
+          "area",
+          "log_area",
+          "rooms",
+          "rooms_missing",
+          "bedrooms",
+          "bedrooms_missing",
+          "bathrooms",
+          "bathrooms_missing",
+          "year",
+          "year_missing",
+          "building_floors",
+          "building_floors_missing",
+          "apartment_floor",
+          "apartment_floor_missing"
+        ],
+        "weights": [
+          7.31088364,
+          -0.07482599,
+          0.13822108,
+          -0.04888806,
+          0.0,
+          -0.10007091,
+          -0.14845959,
+          0.11843724,
+          0.21238438,
+          -0.09770331,
+          -0.15124037,
+          0.1419681,
+          -0.02277096,
+          -0.04698736,
+          -0.03085102
+        ],
+        "mean": [
+          0.0,
+          98.19811321,
+          4.42697429,
+          2.85849057,
+          0.0,
+          1.94811321,
+          0.10377358,
+          1.36792453,
+          0.1509434,
+          2023.10849057,
+          0.48584906,
+          10.08018868,
+          0.20283019,
+          5.53301887,
+          0.18867925
+        ],
+        "std": [
+          1.0,
+          58.43831126,
+          0.57106177,
+          1.2126587,
+          1.0,
+          0.84236092,
+          0.3049666,
+          0.60384728,
+          0.3579937,
+          0.83130018,
+          0.49979971,
+          5.62744152,
+          0.40210708,
+          3.50253875,
+          0.39125361
+        ],
+        "defaults": {
+          "rooms": 3.0,
+          "bedrooms": 2.0,
+          "bathrooms": 1.0,
+          "year": 2023.0,
+          "building_floors": 9.0,
+          "apartment_floor": 5.0
+        },
+        "profile": {
+          "rooms": 3.0,
+          "bedrooms": 2.0,
+          "bathrooms": 1.0,
+          "year": 2023.0,
+          "building_floors": 11.0,
+          "apartment_floor": 5.0
+        }
+      }
     },
     {
       "id": "vienna",
@@ -2074,7 +2786,96 @@
           "url": "https://realting.com/uploads/bigSlider/8cf/cf08531c1c31f.webp",
           "m2": 176.0
         }
-      ]
+      ],
+      "model": {
+        "type": "linear_log_ppm2",
+        "loss": "mse_log_ppm2",
+        "n": 352,
+        "features": [
+          "bias",
+          "area",
+          "log_area",
+          "rooms",
+          "rooms_missing",
+          "bedrooms",
+          "bedrooms_missing",
+          "bathrooms",
+          "bathrooms_missing",
+          "year",
+          "year_missing",
+          "building_floors",
+          "building_floors_missing",
+          "apartment_floor",
+          "apartment_floor_missing"
+        ],
+        "weights": [
+          8.02531225,
+          0.01540244,
+          -0.05744355,
+          -0.00242551,
+          -0.04618348,
+          -0.03391162,
+          0.08877152,
+          0.0,
+          -0.04717129,
+          0.07765136,
+          -0.00460521,
+          -0.11352342,
+          -0.00778207,
+          0.01906415,
+          -0.00778207
+        ],
+        "mean": [
+          0.0,
+          59.65056818,
+          4.01435293,
+          2.46306818,
+          0.00284091,
+          1.99715909,
+          0.98579545,
+          1.0,
+          0.98295455,
+          1988.11079545,
+          0.00852273,
+          6.35795455,
+          0.00284091,
+          3.93465909,
+          0.00284091
+        ],
+        "std": [
+          1.0,
+          23.34706157,
+          0.39003069,
+          0.89111761,
+          0.05322441,
+          0.0922749,
+          0.11833333,
+          1.0,
+          0.12944075,
+          27.57524205,
+          0.09192437,
+          3.55592405,
+          0.05322441,
+          2.79381275,
+          0.05322441
+        ],
+        "defaults": {
+          "rooms": 2.0,
+          "bedrooms": 2.0,
+          "bathrooms": 1.0,
+          "year": 1988.0,
+          "building_floors": 5.0,
+          "apartment_floor": 3.0
+        },
+        "profile": {
+          "rooms": 3.0,
+          "bedrooms": 2.5,
+          "bathrooms": 1.0,
+          "year": 1995.0,
+          "building_floors": 5.0,
+          "apartment_floor": 4.0
+        }
+      }
     },
     {
       "id": "warsaw",
@@ -2183,7 +2984,96 @@
           "url": "https://realting.com/uploads/bigSlider/a4c/9c16fa1ec8e3b504f7198780a5b65.webp",
           "m2": 379.0
         }
-      ]
+      ],
+      "model": {
+        "type": "linear_log_ppm2",
+        "loss": "mse_log_ppm2",
+        "n": 934,
+        "features": [
+          "bias",
+          "area",
+          "log_area",
+          "rooms",
+          "rooms_missing",
+          "bedrooms",
+          "bedrooms_missing",
+          "bathrooms",
+          "bathrooms_missing",
+          "year",
+          "year_missing",
+          "building_floors",
+          "building_floors_missing",
+          "apartment_floor",
+          "apartment_floor_missing"
+        ],
+        "weights": [
+          8.24765741,
+          0.11644895,
+          -0.05027195,
+          -0.08186603,
+          0.01467374,
+          -0.00767257,
+          0.00305631,
+          0.060448,
+          -0.0023827,
+          0.05482412,
+          0.00358951,
+          0.02351448,
+          -0.01543395,
+          0.06184368,
+          -0.01200089
+        ],
+        "mean": [
+          0.0,
+          90.0267666,
+          4.36312803,
+          3.26124197,
+          0.03961456,
+          2.07815846,
+          0.65631692,
+          1.2366167,
+          0.3875803,
+          569.28158458,
+          0.3640257,
+          5.69379015,
+          0.30942184,
+          3.82441113,
+          0.20449679
+        ],
+        "std": [
+          1.0,
+          51.34163955,
+          0.51544638,
+          1.17534311,
+          0.19505191,
+          0.6635948,
+          0.47493686,
+          0.59143395,
+          0.48719792,
+          894.30854161,
+          0.48115589,
+          3.59163076,
+          0.4622553,
+          3.68677296,
+          0.40333342
+        ],
+        "defaults": {
+          "rooms": 3.0,
+          "bedrooms": 2.0,
+          "bathrooms": 1.0,
+          "year": 10.0,
+          "building_floors": 5.0,
+          "apartment_floor": 3.0
+        },
+        "profile": {
+          "rooms": 3.0,
+          "bedrooms": 2.0,
+          "bathrooms": 1.0,
+          "year": 11.5,
+          "building_floors": 5.0,
+          "apartment_floor": 3.0
+        }
+      }
     },
     {
       "id": "yerevan",
@@ -2401,7 +3291,97 @@
           "url": "https://realting.com/uploads/bigSlider/564/9dba887582c97.webp",
           "m2": 338.0
         }
-      ]
+      ],
+      "model": {
+        "type": "linear_log_ppm2",
+        "loss": "mse_log_ppm2",
+        "n": 466,
+        "features": [
+          "bias",
+          "area",
+          "log_area",
+          "rooms",
+          "rooms_missing",
+          "bedrooms",
+          "bedrooms_missing",
+          "bathrooms",
+          "bathrooms_missing",
+          "year",
+          "year_missing",
+          "building_floors",
+          "building_floors_missing",
+          "apartment_floor",
+          "apartment_floor_missing"
+        ],
+        "weights": [
+          8.15787474,
+          -0.07482623,
+          0.03554294,
+          -0.01695872,
+          0.00388658,
+          0.0,
+          -0.0124149,
+          0.11334435,
+          0.00609666,
+          -0.00747734,
+          0.04601471,
+          0.06559523,
+          0.02103974,
+          -0.01716025,
+          -0.01704166
+        ],
+        "mean": [
+          0.0,
+          94.78969957,
+          4.42745939,
+          3.35407725,
+          0.03218884,
+          3.0,
+          0.99785408,
+          1.16738197,
+          0.12875536,
+          1988.68669528,
+          0.35622318,
+          3.38841202,
+          0.40128755,
+          2.16738197,
+          0.53862661
+        ],
+        "std": [
+          1.0,
+          50.72562292,
+          0.49441909,
+          2.32202426,
+          0.17650133,
+          1.0,
+          0.04627437,
+          0.49231041,
+          0.33492898,
+          35.54240221,
+          0.47888227,
+          1.54384937,
+          0.49015901,
+          1.05731075,
+          0.49850575
+        ],
+        "defaults": {
+          "rooms": 3.0,
+          "bedrooms": 3.0,
+          "bathrooms": 1.0,
+          "year": 2001.0,
+          "building_floors": 3.0,
+          "apartment_floor": 2.0
+        },
+        "profile": {
+          "rooms": 3.0,
+          "bedrooms": 1.0,
+          "bathrooms": 1.0,
+          "year": 1994.5,
+          "building_floors": 3.0,
+          "apartment_floor": 2.0
+        }
+      }
     }
-  ]
+  ],
+  "modelNote": "Linear regression on log(USD/m²) from condo features, trained per city when ≥ 200 listings. Compare screens show median and model estimates side by side."
 }

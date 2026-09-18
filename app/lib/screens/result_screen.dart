@@ -170,6 +170,14 @@ class _ResultScreenState extends State<ResultScreen> {
               ),
               const SizedBox(height: 16),
               _StatsCard(cityA: cityA, cityB: cityB, sizeM2: _sizeM2),
+              if (cityA.hasModel || cityB.hasModel) ...[
+                const SizedBox(height: 12),
+                _ModelWhyCard(
+                  cityA: cityA,
+                  cityB: cityB,
+                  sizeM2: _sizeM2,
+                ),
+              ],
               const SizedBox(height: 8),
             ],
           ),
@@ -350,6 +358,103 @@ class _StatsCard extends StatelessWidget {
                   '${formatUsd(cityB.rangeLowFor(sizeM2))}–${formatUsd(cityB.rangeHighFor(sizeM2))}',
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ModelWhyCard extends StatelessWidget {
+  const _ModelWhyCard({
+    required this.cityA,
+    required this.cityB,
+    required this.sizeM2,
+  });
+
+  final Capital cityA;
+  final Capital cityB;
+  final int sizeM2;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    final text = Theme.of(context).textTheme;
+    final blocks = <Widget>[
+      Text(
+        'Why model differs from median',
+        style: text.titleSmall?.copyWith(fontWeight: FontWeight.w600),
+      ),
+      const SizedBox(height: 4),
+      Text(
+        'Median is the city-wide middle USD/m². The model prices a typical '
+        'condo near this size using rooms, year, and floors.',
+        style: text.bodySmall?.copyWith(color: colors.onSurfaceVariant),
+      ),
+    ];
+
+    for (final city in [cityA, cityB]) {
+      final why = city.modelExplanationFor(sizeM2);
+      if (why == null) continue;
+      final gapLabel = why.vsMedian == 'close'
+          ? 'about even with median'
+          : '${why.gapPct.abs().toStringAsFixed(0)}% ${why.vsMedian} than median';
+      blocks.add(const SizedBox(height: 14));
+      blocks.add(
+        Text(
+          city.city,
+          style: text.labelLarge?.copyWith(fontWeight: FontWeight.w700),
+        ),
+      );
+      blocks.add(
+        Text(
+          gapLabel,
+          style: text.bodyMedium?.copyWith(
+            color: why.vsMedian == 'higher'
+                ? colors.tertiary
+                : why.vsMedian == 'lower'
+                    ? colors.primary
+                    : colors.onSurfaceVariant,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      );
+      blocks.add(const SizedBox(height: 4));
+      blocks.add(
+        Text(
+          why.assumes,
+          style: text.bodySmall?.copyWith(color: colors.onSurfaceVariant),
+        ),
+      );
+      for (final driver in why.drivers) {
+        blocks.add(const SizedBox(height: 6));
+        blocks.add(
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                driver.pushesUp
+                    ? Icons.arrow_upward_rounded
+                    : Icons.arrow_downward_rounded,
+                size: 16,
+                color: driver.pushesUp ? colors.tertiary : colors.primary,
+              ),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(driver.label, style: text.bodySmall),
+              ),
+            ],
+          ),
+        );
+      }
+    }
+
+    return Card.filled(
+      color: colors.surfaceContainerLow,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: blocks,
         ),
       ),
     );

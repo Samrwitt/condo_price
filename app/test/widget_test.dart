@@ -194,5 +194,6 @@ void main() {
     expect(find.textContaining('Model'), findsWidgets);
     expect(find.text('Median USD / m²'), findsOneWidget);
     expect(find.text('Model price'), findsOneWidget);
+    expect(find.textContaining('Why model differs'), findsOneWidget);
   });
 }
